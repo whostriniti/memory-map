@@ -11,31 +11,7 @@
       font-family: 'Segoe UI', sans-serif;
       color: white;
       overflow-x: hidden;
-
-      <!-- Add this inside <body> (anywhere near the top is fine) -->
-<div class="floating-bg">
-  <img src="https://i.imgur.com/ehkE97C.png" class="bg-image" style="top: 10%; left: 5%;" />
-  <img src="https://i.imgur.com/ghpIqEk.png" class="bg-image" style="top: 50%; left: 80%;" />
-  <img src="https://i.imgur.com/yT2CEXS.png" class="bg-image" style="top: 75%; left: 20%;" />
-</div>
-
     }
-
-    .bg-image {
-  position: fixed;
-  width: 100px;
-  opacity: 0.07;
-  z-index: 0;
-  animation: floatSlow 25s infinite ease-in-out;
-  pointer-events: none;
-}
-
-@keyframes floatSlow {
-  0% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(5deg); }
-  100% { transform: translateY(0px) rotate(0deg); }
-}
-
 
     header {
       text-align: center;
@@ -78,7 +54,7 @@
 
     #promise {
       background: #222;
-      margin: 40px 15px;
+      margin: 40px auto;
       max-width: 700px;
       padding: 30px;
       border-radius: 10px;
@@ -99,7 +75,7 @@
       font-size: 2rem;
       animation: float 10s linear infinite;
       pointer-events: none;
-      z-index: 0;
+      z-index: 1;
     }
 
     @keyframes float {
@@ -146,6 +122,21 @@
       100% { opacity: 1; transform: scale(1); }
     }
 
+    .bg-image {
+      position: fixed;
+      width: 120px;
+      opacity: 0.08;
+      z-index: 0;
+      animation: floatSlow 25s infinite ease-in-out;
+      pointer-events: none;
+    }
+
+    @keyframes floatSlow {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+
     @media (max-width: 600px) {
       header h1 {
         font-size: 2em;
@@ -162,17 +153,26 @@
 </head>
 <body>
 
-  <!-- Hidden Audio Player -->
+  <!-- Background music (starts on click) -->
   <audio id="bg-music" loop>
     <source src="ylimd8bit.mp3" type="audio/mpeg" />
     Your browser does not support the audio element.
   </audio>
 
+  <!-- Floating Background Graphics (Roblox + Fortnite) -->
+  <div class="floating-bg">
+    <img src="https://i.imgur.com/ehkE97C.png" class="bg-image" style="top: 10%; left: 5%;" />
+    <img src="https://i.imgur.com/ghpIqEk.png" class="bg-image" style="top: 50%; left: 80%;" />
+    <img src="https://i.imgur.com/yT2CEXS.png" class="bg-image" style="top: 75%; left: 20%;" />
+  </div>
+
+  <!-- Page Header -->
   <header>
     <h1>🌌 The Story of Us 😼💍</h1>
     <p>From Roblox to Rings and Ridiculous Laughs</p>
   </header>
 
+  <!-- Relationship Timeline -->
   <div class="timeline">
     <div class="event"><h3>📅 Feb 8</h3><p>We met. Chaos and love were born 😎</p></div>
     <div class="event"><h3>❤️ Feb 14</h3><p>Our first time. Emotional damage (in a good way) 💘</p></div>
@@ -183,26 +183,29 @@
     <div class="event"><h3>🐱 Aug 16</h3><p>Finn was born. And instantly spoiled 😼</p></div>
   </div>
 
-  <div id="promise" style="margin-left: auto; margin-right: auto;">
-  <h2>💍 My Promise</h2>
-  <p>
-    This isn’t just a ring. It’s the moment I said: “You're it for me.”  
-    Through Roblox, loud car rides, Monster cans, and your chaotic emojis, I’m here.  
-    Always. 🙏😭🌝💖
-  </p>
-</div>
+  <!-- Promise Section -->
+  <div id="promise">
+    <h2>💍 My Promise</h2>
+    <p>
+      This isn’t just a ring. It’s the moment I said: “You're it for me.”  
+      Through Roblox, loud car rides, Monster cans, and your chaotic emojis, I’m here.  
+      Always. 🙏😭🌝💖
+    </p>
+  </div>
 
-<div class="reveal-container">
-  <button class="music-button" onclick="document.getElementById('bg-music').play()">▶️ Play Our Song</button>
-  <button class="reveal-button" onclick="document.getElementById('ring').classList.remove('hidden'); document.getElementById('ring').classList.add('visible');">💖 Click to Reveal Your Ring 💖</button>
-  <img id="ring" class="ring-image hidden" src="https://banner2.cleanpng.com/20240306/ucq/transparent-proposal-day-marry-me-diamond-engagement-ring-jewe-close-up-of-diamond-engagement-1710849001134.webp" alt="Promise Ring">
-</div>
+  <!-- Music and Ring Reveal -->
+  <div class="reveal-container">
+    <button class="music-button" onclick="document.getElementById('bg-music').play()">▶️ Play Our Song</button>
+    <button class="reveal-button" onclick="document.getElementById('ring').classList.remove('hidden'); document.getElementById('ring').classList.add('visible');">💖 Click to Reveal Your Ring 💖</button>
+    <img id="ring" class="ring-image hidden" src="https://banner2.cleanpng.com/20240306/ucq/transparent-proposal-day-marry-me-diamond-engagement-ring-jewe-close-up-of-diamond-engagement-1710849001134.webp" alt="Promise Ring">
+  </div>
 
-
+  <!-- Footer -->
   <div class="footer">
     Made with croissants, Monster cans, and love. 🍪💘
   </div>
 
+  <!-- Floating Emojis Script -->
   <script>
     const emojis = ["😼", "🙀", "💍", "🌝", "💔", "😭", "😔", "🫂", "🎮", "🍪"];
     for (let i = 0; i < 25; i++) {
@@ -213,10 +216,6 @@
       emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
       document.body.appendChild(emoji);
     }
-
-    // Show ring image with class toggle
-    const ring = document.getElementById('ring');
-    ring.classList.remove('hidden');
   </script>
 
 </body>
