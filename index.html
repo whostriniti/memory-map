@@ -106,16 +106,16 @@
     }
 
     .ring-image.hidden {
-      display: none;
-    }
+  display: none;
+}
 
-    .ring-image.visible {
-      display: block;
-      animation: sparkle 2s ease-in-out;
-      max-width: 300px;
-      width: 80%;
-      margin-top: 20px;
-    }
+.ring-image.visible {
+  display: block;
+  animation: sparkle 2s ease-in-out;
+  max-width: 300px;
+  width: 80%;
+  margin-top: 20px;
+}
 
     @keyframes sparkle {
       0% { opacity: 0; transform: scale(0.5); }
@@ -196,8 +196,13 @@
   <!-- Music and Ring Reveal -->
   <div class="reveal-container">
     <button class="music-button" onclick="document.getElementById('bg-music').play()">▶️ Play Our Song</button>
-    <button class="reveal-button" onclick="document.getElementById('ring').classList.remove('hidden'); document.getElementById('ring').classList.add('visible');">💖 Click to Reveal Your Ring 💖</button>
-    <img id="ring" class="ring-image hidden" src="https://banner2.cleanpng.com/20240306/ucq/transparent-proposal-day-marry-me-diamond-engagement-ring-jewe-close-up-of-diamond-engagement-1710849001134.webp" alt="Promise Ring">
+   <button class="reveal-button" onclick="
+  document.getElementById('ring').classList.remove('hidden');
+  document.getElementById('ring').classList.add('visible');
+">
+💖 Click to Reveal Your Ring 💖
+</button>
+    <img id="ring" class="ring-image hidden" src="ring.png" alt="Promise Ring">
   </div>
 
   <!-- Footer -->
