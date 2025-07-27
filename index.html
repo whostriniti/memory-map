@@ -80,7 +80,7 @@
 
     @keyframes float {
       0% { transform: translateY(100vh) rotate(0deg); }
-      100% { transform: translateY(-10vh) rotate(360deg); }
+      100% { transform: translateY(-120vh) rotate(360deg); }
     }
 
     .reveal-container {
@@ -228,13 +228,16 @@
 <script>
   const emojis = ["😼", "🙀", "💍", "🌝", "💔", "😭", "😔", "🫂", "🎮", "🍪"];
   function spawnEmojis() {
-    for (let i = 0; i < 25; i++) {
-      const emoji = document.createElement("div");
-      emoji.className = "floating-emoji";
-      emoji.style.left = Math.random() * 100 + "vw";
-      emoji.style.animationDuration = (6 + Math.random() * 5) + "s";
-      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      document.body.appendChild(emoji);
+    document.querySelectorAll('.floating-emoji').forEach(e => e.remove()); // Remove old emojis
+
+  for (let i = 0; i < 25; i++) {
+    const emoji = document.createElement("div");
+    emoji.className = "floating-emoji";
+    emoji.style.left = Math.random() * 100 + "vw";
+    emoji.style.animationDuration = (6 + Math.random() * 5) + "s";
+    emoji.style.top = "100vh"; // Start from bottom
+    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    document.body.appendChild(emoji);
     }
   }
 
@@ -242,16 +245,18 @@
     document.getElementById('ringModal').style.display = 'flex';
   }
 
-  function closeModal() {
-   document.getElementById('ringModal').style.display = 'none';
-  document.getElementById('ringRevealFinal').style.display = 'block';
-  spawnEmojis(); 
-  }
+ document.addEventListener("DOMContentLoaded", () => {
+  spawnEmojis();
+  document.getElementById("revealBtn").addEventListener("click", showModal);
+});
 
-  document.addEventListener("DOMContentLoaded", () => {
-    spawnEmojis();
-    document.getElementById("revealBtn").addEventListener("click", showModal);
-  });
+function closeModal() {
+  document.getElementById('ringModal').style.display = 'none';
+  document.getElementById('ringRevealFinal').style.display = 'block';
+  spawnEmojis(); // Re-spawn after modal
+}
+
+ 
 </script>
 
 </body>
