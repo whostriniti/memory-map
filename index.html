@@ -62,6 +62,16 @@
       text-align: center;
       font-size: 1.1em;
     }
+    #starCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+}
+
 
     .footer {
       text-align: center;
@@ -178,6 +188,7 @@
   </style>
 </head>
 <body>
+<canvas id="starCanvas"></canvas>
 
 <!-- Music -->
 <audio id="bg-music" loop>
@@ -273,6 +284,55 @@ function closeModal() {
 
  
 </script>
+
+  <script>
+  const canvas = document.getElementById("starCanvas");
+  const ctx = canvas.getContext("2d");
+  let stars = [];
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function createStars() {
+    stars = [];
+    for (let i = 0; i < 100; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 1.5 + 0.5,
+        alpha: Math.random(),
+        delta: Math.random() * 0.02 + 0.005,
+      });
+    }
+  }
+
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let star of stars) {
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+      ctx.fill();
+      star.alpha += star.delta;
+      if (star.alpha <= 0 || star.alpha >= 1) {
+        star.delta *= -1;
+      }
+    }
+    requestAnimationFrame(drawStars);
+  }
+
+  window.addEventListener("resize", () => {
+    resizeCanvas();
+    createStars();
+  });
+
+  resizeCanvas();
+  createStars();
+  drawStars();
+</script>
+
 
 </body>
 </html>
