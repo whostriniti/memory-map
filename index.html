@@ -88,7 +88,7 @@
       margin: 50px 15px;
     }
 
-    .reveal-button {
+    .reveal-button, .music-button {
       background-color: #ff69b4;
       color: white;
       border: none;
@@ -97,19 +97,24 @@
       border-radius: 10px;
       cursor: pointer;
       transition: all 0.3s ease;
+      margin: 10px;
     }
 
-    .reveal-button:hover {
+    .reveal-button:hover, .music-button:hover {
       background-color: #ff1493;
       transform: scale(1.05);
     }
 
-    .ring-image {
-      margin-top: 20px;
+    .ring-image.hidden {
       display: none;
+    }
+
+    .ring-image.visible {
+      display: block;
       animation: sparkle 2s ease-in-out;
       max-width: 300px;
       width: 80%;
+      margin-top: 20px;
     }
 
     @keyframes sparkle {
@@ -124,7 +129,7 @@
       .event h3 {
         font-size: 1.1em;
       }
-      .reveal-button {
+      .reveal-button, .music-button {
         font-size: 1em;
         padding: 12px 20px;
       }
@@ -133,8 +138,8 @@
 </head>
 <body>
 
-  <!-- Background Music -->
-  <audio autoplay loop>
+  <!-- Hidden Audio Player -->
+  <audio id="bg-music" loop>
     <source src="ylimd8bit.mp3" type="audio/mpeg" />
     Your browser does not support the audio element.
   </audio>
@@ -164,8 +169,9 @@
   </div>
 
   <div class="reveal-container">
-    <button class="reveal-button" onclick="document.getElementById('ring').style.display='block'">💖 Click to Reveal Your Ring 💖</button>
-    <img id="ring" class="ring-image" src="https://i.imgur.com/oSgEjWc.png" alt="Promise Ring">
+    <button class="music-button" onclick="document.getElementById('bg-music').play()">▶️ Play Our Song</button>
+    <button class="reveal-button" onclick="document.getElementById('ring').classList.add('visible');">💖 Click to Reveal Your Ring 💖</button>
+    <img id="ring" class="ring-image hidden" src="https://i.imgur.com/oSgEjWc.png" alt="Promise Ring">
   </div>
 
   <div class="footer">
@@ -182,6 +188,10 @@
       emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
       document.body.appendChild(emoji);
     }
+
+    // Show ring image with class toggle
+    const ring = document.getElementById('ring');
+    ring.classList.remove('hidden');
   </script>
 
 </body>
