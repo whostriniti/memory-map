@@ -11,7 +11,31 @@
       font-family: 'Segoe UI', sans-serif;
       color: white;
       overflow-x: hidden;
+
+      <!-- Add this inside <body> (anywhere near the top is fine) -->
+<div class="floating-bg">
+  <img src="https://i.imgur.com/ehkE97C.png" class="bg-image" style="top: 10%; left: 5%;" />
+  <img src="https://i.imgur.com/ghpIqEk.png" class="bg-image" style="top: 50%; left: 80%;" />
+  <img src="https://i.imgur.com/yT2CEXS.png" class="bg-image" style="top: 75%; left: 20%;" />
+</div>
+
     }
+
+    .bg-image {
+  position: fixed;
+  width: 100px;
+  opacity: 0.07;
+  z-index: 0;
+  animation: floatSlow 25s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes floatSlow {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
 
     header {
       text-align: center;
