@@ -11,6 +11,18 @@
       font-family: 'Segoe UI', sans-serif;
       color: white;
       overflow-x: hidden;
+
+      .ring-image.hidden {
+  display: none;
+}
+
+.ring-image.visible {
+  display: block;
+  animation: sparkle 2s ease-in-out;
+  max-width: 300px;
+  width: 80%;
+  margin-top: 20px;
+}
     }
 
     header {
@@ -194,16 +206,16 @@
   </div>
 
   <!-- Music and Ring Reveal -->
-  <div class="reveal-container">
-    <button class="music-button" onclick="document.getElementById('bg-music').play()">▶️ Play Our Song</button>
-   <button class="reveal-button" onclick="
-  document.getElementById('ring').classList.remove('hidden');
-  document.getElementById('ring').classList.add('visible');
-">
-💖 Click to Reveal Your Ring 💖
-</button>
-    <img id="ring" class="ring-image hidden" src="ring.png" alt="Promise Ring">
-  </div>
+ <div class="reveal-container">
+  <button class="music-button" onclick="document.getElementById('bg-music').play()">▶️ Play Our Song</button>
+  <button class="reveal-button" onclick="
+    document.getElementById('ring').classList.remove('hidden');
+    document.getElementById('ring').classList.add('visible');
+  ">💖 Click to Reveal Your Ring 💖</button>
+
+  <img id="ring" class="ring-image hidden" src="ring.png" alt="Promise Ring">
+</div>
+
 
   <!-- Footer -->
   <div class="footer">
