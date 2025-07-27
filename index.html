@@ -82,7 +82,13 @@
   animation: glow 4s ease-in-out infinite;
   filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7));
 }
-
+@media (max-width: 600px) {
+  #moon {
+    width: 90px;           
+    top: 5%;
+    right: 10%;
+  }
+}
 @keyframes glow {
   0%, 100% { opacity: 0.85; transform: scale(1); }
   50% { opacity: 1; transform: scale(1.03); }
@@ -225,7 +231,7 @@
   <img src="images/sc3.png" class="bg-image" style="top: 30%; left: 25%;" alt="Snapchat 3" />
   <img src="images/sc4.png" class="bg-image" style="top: 60%; left: 60%;" alt="Snapchat 4" />
   <img src="images/us1.png" class="bg-image" style="top: 20%; left: 45%;" alt="Us 1" />
-  <img src="images/us5.png" class="bg-image" style="top: 65%; left: 45%;" alt="Us 5" />
+  <img src="images/us5.png" class="bg-image" style="top: 60%; left: 45%;" alt="Us 5" />
   
   <img src="images/us4.png" class="bg-image" style="top: 10%; left: 15%;" alt="Us 4" />
   
