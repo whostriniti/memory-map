@@ -234,7 +234,7 @@
     const emoji = document.createElement("div");
     emoji.className = "floating-emoji";
     emoji.style.left = Math.random() * 100 + "vw";
-    emoji.style.animationDuration = (6 + Math.random() * 5) + "s";
+    emoji.style.animationDuration = (6 + Math.random() * 3) + "s";
     emoji.style.top = "100vh"; // Start from bottom
     emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
     document.body.appendChild(emoji);
