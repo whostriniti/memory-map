@@ -75,7 +75,7 @@
   font-size: 2rem;
   animation: float 10s linear infinite;
   pointer-events: none;
-  z-index: 1001; /* higher than modal background */
+  z-index: 2000; /* higher than modal background */
 }
 
     @keyframes float {
@@ -133,7 +133,7 @@
       border-radius: 12px;
       animation: popIn 0.5s ease;
       display: block;
-      z-index: 1002;
+      z-index: 2001;
     }
 
     @keyframes popIn {
@@ -244,6 +244,7 @@
   </div>
 
   <script>
+     window.addEventListener("DOMContentLoaded", () => {
     const emojis = ["😼", "🙀", "💍", "🌝", "💔", "😭", "😔", "🫂", "🎮", "🍪"];
     for (let i = 0; i < 25; i++) {
       const emoji = document.createElement("div");
@@ -253,17 +254,16 @@
       emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
       document.body.appendChild(emoji);
     }
+  });
 
-   function showModal() {
-  const modal = document.getElementById('ringModal');
-  modal.classList.add('show');
-}
+  function showModal() {
+    document.getElementById('ringModal').style.display = 'flex';
+  }
 
-function closeModal() {
-  const modal = document.getElementById('ringModal');
-  modal.classList.remove('show');
-  document.getElementById('ringRevealFinal').style.display = 'block';
-}
+  function closeModal() {
+    document.getElementById('ringModal').style.display = 'none';
+    document.getElementById('ringRevealFinal').style.display = 'block';
+  }
   </script>
 
 </body>
