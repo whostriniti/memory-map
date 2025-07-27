@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Story of Us 💙</title>
   <style>
     body {
@@ -71,12 +71,12 @@
     }
 
     .floating-emoji {
-  position: fixed;
-  font-size: 2rem;
-  animation: float 10s linear infinite;
-  pointer-events: none;
-  z-index: 2000; /* higher than modal background */
-}
+      position: fixed;
+      font-size: 2rem;
+      animation: float 10s linear infinite;
+      pointer-events: none;
+      z-index: 10;
+    }
 
     @keyframes float {
       0% { transform: translateY(100vh) rotate(0deg); }
@@ -105,26 +105,17 @@
       transform: scale(1.05);
     }
 
-    /* Modal */
     #ringModal {
-  visibility: hidden;
-  opacity: 0;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.9);
-  z-index: 1000;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  transition: opacity 0.4s ease;
-}
-#ringModal.show {
-  visibility: visible;
-  opacity: 1;
-  display: flex;
-}
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+    }
 
     #ringModal img {
       max-width: 300px;
@@ -132,8 +123,6 @@
       height: auto;
       border-radius: 12px;
       animation: popIn 0.5s ease;
-      display: block;
-      z-index: 2001;
     }
 
     @keyframes popIn {
@@ -141,18 +130,11 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
-    /* Ring Reveal After Modal */
     #ringRevealFinal {
       display: none;
-      margin: 30px auto 0;
-      max-width: 300px;
+      margin-top: 20px;
+      max-width: 200px;
       width: 80%;
-      animation: sparkle 1.2s ease-in-out;
-    }
-
-    @keyframes sparkle {
-      0% { opacity: 0; transform: scale(0.8); }
-      100% { opacity: 1; transform: scale(1); }
     }
 
     .bg-image {
@@ -186,85 +168,83 @@
 </head>
 <body>
 
-  <!-- Music -->
-  <audio id="bg-music" loop>
-    <source src="ylimd8bit.mp3" type="audio/mpeg" />
-    Your browser does not support the audio element.
-  </audio>
+<!-- Music -->
+<audio id="bg-music" loop>
+  <source src="ylimd8bit.mp3" type="audio/mpeg" />
+</audio>
 
-  <!-- Floating emojis background -->
-  <div class="floating-bg">
-    <img src="https://i.imgur.com/ehkE97C.png" class="bg-image" style="top: 10%; left: 5%;" />
-    <img src="https://i.imgur.com/ghpIqEk.png" class="bg-image" style="top: 50%; left: 80%;" />
-    <img src="https://i.imgur.com/yT2CEXS.png" class="bg-image" style="top: 75%; left: 20%;" />
-  </div>
+<!-- Floating Emojis -->
+<script>
+  const emojis = ["😼", "🙀", "💍", "🌝", "💔", "😭", "😔", "🫂", "🎮", "🍪"];
+  for (let i = 0; i < 25; i++) {
+    const emoji = document.createElement("div");
+    emoji.className = "floating-emoji";
+    emoji.style.left = Math.random() * 100 + "vw";
+    emoji.style.animationDuration = (6 + Math.random() * 5) + "s";
+    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    document.body.appendChild(emoji);
+  }
+</script>
 
-  <!-- Modal -->
-  <div id="ringModal" onclick="closeModal()">
-    <img src="ring.png" alt="Promise Ring">
-  </div>
+<!-- Floating Images -->
+<div class="floating-bg">
+  <img src="https://i.imgur.com/ehkE97C.png" class="bg-image" style="top: 10%; left: 5%;" />
+  <img src="https://i.imgur.com/ghpIqEk.png" class="bg-image" style="top: 50%; left: 80%;" />
+  <img src="https://i.imgur.com/yT2CEXS.png" class="bg-image" style="top: 75%; left: 20%;" />
+</div>
 
-  <!-- Header -->
-  <header>
-    <h1>🌌 The Story of Us 😼💍</h1>
-    <p>From Roblox to Rings and Ridiculous Laughs</p>
-  </header>
+<!-- Ring Modal -->
+<div id="ringModal" onclick="closeModal()">
+  <img src="ring.png" alt="Promise Ring">
+</div>
 
-  <!-- Timeline -->
-  <div class="timeline">
-    <div class="event"><h3>📅 Feb 8</h3><p>We met. Chaos and love were born 😎</p></div>
-    <div class="event"><h3>❤️ Feb 14</h3><p>Our first time. Emotional damage (in a good way) 💘</p></div>
-    <div class="event"><h3>🫶 Mar 7</h3><p>We made it official 💏</p></div>
-    <div class="event"><h3>💬 Mar 30 @ 1:05AM</h3><p>Our first “I love yous” 🥺</p></div>
-    <div class="event"><h3>👶 July 7</h3><p>You trusted me with the deepest part of you 😔</p></div>
-    <div class="event"><h3>🦎 June 26</h3><p>Kiki’s birthday — royalty with claws 🙀</p></div>
-    <div class="event"><h3>🐱 Aug 16</h3><p>Finn was born. And instantly spoiled 😼</p></div>
-  </div>
+<header>
+  <h1>🌌 The Story of Us 😼💍</h1>
+  <p>From Roblox to Rings and Ridiculous Laughs</p>
+</header>
 
-  <!-- Promise Section -->
-  <div id="promise">
-    <h2>💍 My Promise</h2>
-    <p>
-      This isn’t just a ring. It’s the moment I said: “You're it for me.”  
-      Through Roblox, loud car rides, Monster cans, and your chaotic emojis, I’m here.  
-      Always. 🙏😭🌝💖
-    </p>
-  </div>
+<div class="timeline">
+  <div class="event"><h3>📅 Feb 8</h3><p>We met. Chaos and love were born 😎</p></div>
+  <div class="event"><h3>❤️ Feb 14</h3><p>Our first time. Emotional damage (in a good way) 💘</p></div>
+  <div class="event"><h3>🫶 Mar 7</h3><p>We made it official 💏</p></div>
+  <div class="event"><h3>💬 Mar 30 @ 1:05AM</h3><p>Our first “I love yous” 🥺</p></div>
+  <div class="event"><h3>👶 July 7</h3><p>You trusted me with the deepest part of you 😔</p></div>
+  <div class="event"><h3>🦎 June 26</h3><p>Kiki’s birthday — royalty with claws 🙀</p></div>
+  <div class="event"><h3>🐱 Aug 16</h3><p>Finn was born. And instantly spoiled 😼</p></div>
+</div>
 
-  <!-- Reveal Button -->
-  <div class="reveal-container">
-    <button class="music-button" onclick="document.getElementById('bg-music').play()">▶️ Play Our Song</button>
-    <button class="reveal-button" onclick="showModal()">💖 Click to Reveal Your Ring 💖</button>
-    <img id="ringRevealFinal" src="ring.png" alt="Promise Ring Final">
-  </div>
+<div id="promise">
+  <h2>💍 My Promise</h2>
+  <p>
+    This isn’t just a ring. It’s the moment I said: “You're it for me.”  
+    Through Roblox, loud car rides, Monster cans, and your chaotic emojis, I’m here.  
+    Always. 🙏😭🌝💖
+  </p>
+</div>
 
-  <!-- Footer -->
-  <div class="footer">
-    Made with croissants, Monster cans, and love. 🍪💘
-  </div>
+<div class="reveal-container">
+  <button class="music-button" onclick="document.getElementById('bg-music').play()">▶️ Play Our Song</button>
+  <button class="reveal-button" onclick="showModal()">💖 Click to Reveal Your Ring 💖</button>
+  <img id="ringRevealFinal" src="ring.png" alt="Promise Ring Final Position">
+</div>
 
-  <script>
-     window.addEventListener("DOMContentLoaded", () => {
-    const emojis = ["😼", "🙀", "💍", "🌝", "💔", "😭", "😔", "🫂", "🎮", "🍪"];
-    for (let i = 0; i < 25; i++) {
-      const emoji = document.createElement("div");
-      emoji.className = "floating-emoji";
-      emoji.style.left = Math.random() * 100 + "vw";
-      emoji.style.animationDuration = (6 + Math.random() * 5) + "s";
-      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      document.body.appendChild(emoji);
-    }
-  });
+<div class="footer">
+  Made with croissants, Monster cans, and love. 🍪💘
+</div>
+
+<script>
+  const ringModal = document.getElementById('ringModal');
+  const ringReveal = document.getElementById('ringRevealFinal');
 
   function showModal() {
-    document.getElementById('ringModal').style.display = 'flex';
+    ringModal.style.display = 'flex';
   }
 
   function closeModal() {
-    document.getElementById('ringModal').style.display = 'none';
-    document.getElementById('ringRevealFinal').style.display = 'block';
+    ringModal.style.display = 'none';
+    ringReveal.style.display = 'block';
   }
-  </script>
+</script>
 
 </body>
 </html>
