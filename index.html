@@ -331,6 +331,67 @@ function closeModal() {
   resizeCanvas();
   createStars();
   drawStars();
+    // Shooting stars logic
+const shootingStars = [];
+
+function createShootingStar() {
+  const startX = Math.random() * canvas.width;
+  const startY = Math.random() * canvas.height * 0.5; // top half of screen
+  const length = Math.random() * 80 + 100;
+  const speed = Math.random() * 8 + 10;
+
+  shootingStars.push({
+    x: startX,
+    y: startY,
+    length: length,
+    speed: speed,
+    life: 0,
+    maxLife: 30 + Math.random() * 10
+  });
+}
+
+// Modify animate function to include shooting stars
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Stars
+  for (let star of stars) {
+    star.alpha += star.delta;
+    if (star.alpha <= 0 || star.alpha >= 1) star.delta *= -1;
+
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+    ctx.fill();
+  }
+
+  // Shooting Stars
+  for (let i = shootingStars.length - 1; i >= 0; i--) {
+    const s = shootingStars[i];
+    s.x += s.speed;
+    s.y += s.speed;
+    s.life++;
+
+    ctx.beginPath();
+    ctx.moveTo(s.x, s.y);
+    ctx.lineTo(s.x - s.length, s.y - s.length);
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    if (s.life > s.maxLife) {
+      shootingStars.splice(i, 1); // remove it
+    }
+  }
+
+  // Occasionally launch a new shooting star
+  if (Math.random() < 0.01) {
+    createShootingStar();
+  }
+
+  requestAnimationFrame(animate);
+}
+
 </script>
 
 
