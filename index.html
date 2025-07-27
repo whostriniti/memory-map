@@ -173,7 +173,20 @@
   <source src="ylimd8bit.mp3" type="audio/mpeg" />
 </audio>
 
-<!-- Background Emojis and Images -->
+<!-- Floating Emojis -->
+<script>
+  const emojis = ["😼", "🙀", "💍", "🌝", "💔", "😭", "😔", "🫂", "🎮", "🍪"];
+  for (let i = 0; i < 25; i++) {
+    const emoji = document.createElement("div");
+    emoji.className = "floating-emoji";
+    emoji.style.left = Math.random() * 100 + "vw";
+    emoji.style.animationDuration = (6 + Math.random() * 5) + "s";
+    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    document.body.appendChild(emoji);
+  }
+</script>
+
+<!-- Floating Images -->
 <div class="floating-bg">
   <img src="https://i.imgur.com/ehkE97C.png" class="bg-image" style="top: 10%; left: 5%;" />
   <img src="https://i.imgur.com/ghpIqEk.png" class="bg-image" style="top: 50%; left: 80%;" />
@@ -181,7 +194,7 @@
 </div>
 
 <!-- Ring Modal -->
-<div id="ringModal" style="display: none;" onclick="closeModal()">
+<div id="ringModal" onclick="closeModal()">
   <img src="ring.png" alt="Promise Ring">
 </div>
 
@@ -211,7 +224,7 @@
 
 <div class="reveal-container">
   <button class="music-button" onclick="document.getElementById('bg-music').play()">▶️ Play Our Song</button>
-  <button class="reveal-button" id="revealBtn">💖 Click to Reveal Your Ring 💖</button>
+  <button class="reveal-button" onclick="showModal()">💖 Click to Reveal Your Ring 💖</button>
   <img id="ringRevealFinal" src="ring.png" alt="Promise Ring Final Position">
 </div>
 
@@ -219,36 +232,18 @@
   Made with croissants, Monster cans, and love. 🍪💘
 </div>
 
-<!-- Script at end ensures DOM is ready -->
 <script>
-  // Floating Emojis
-  const emojis = ["😼", "🙀", "💍", "🌝", "💔", "😭", "😔", "🫂", "🎮", "🍪"];
-  function spawnEmojis() {
-    for (let i = 0; i < 25; i++) {
-      const emoji = document.createElement("div");
-      emoji.className = "floating-emoji";
-      emoji.style.left = Math.random() * 100 + "vw";
-      emoji.style.animationDuration = (6 + Math.random() * 5) + "s";
-      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      document.body.appendChild(emoji);
-    }
-  }
+  const ringModal = document.getElementById('ringModal');
+  const ringReveal = document.getElementById('ringRevealFinal');
 
-  // Ring Reveal Logic
   function showModal() {
-    document.getElementById('ringModal').style.display = 'flex';
+    ringModal.style.display = 'flex';
   }
 
   function closeModal() {
-    document.getElementById('ringModal').style.display = 'none';
-    document.getElementById('ringRevealFinal').style.display = 'block';
-    spawnEmojis(); // respawn emojis after modal
+    ringModal.style.display = 'none';
+    ringReveal.style.display = 'block';
   }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    spawnEmojis();
-    document.getElementById("revealBtn").addEventListener("click", showModal);
-  });
 </script>
 
 </body>
