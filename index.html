@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Story of Us 💙</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    header h1 {
+      font-size: 3em;
+      color: #00ccff;
+    }
+
+    .timeline {
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .event {
+      background: #111;
+      margin: 20px 0;
+      padding: 15px 20px;
+      border-left: 5px solid #00ccff;
+      border-radius: 5px;
+    }
+
+    .event h3 {
+      margin: 0;
+      font-size: 1.4em;
+      color: #ff69b4;
+    }
+
+    .event p {
+      margin: 5px 0 0;
+    }
+
+    .floating-emoji {
+      position: fixed;
+      font-size: 2rem;
+      animation: float 10s linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); }
+      100% { transform: translateY(-100vh) rotate(360deg); }
+    }
+
+    #promise {
+      background: #222;
+      margin: 40px auto;
+      max-width: 700px;
+      padding: 30px;
+      border-radius: 10px;
+      border: 2px dashed #ff1493;
+      text-align: center;
+      font-size: 1.2em;
+    }
+
+    .footer {
+      text-align: center;
+      margin: 40px 0 20px;
+      font-size: 0.9em;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🌌 The Story of Us 😼💍</h1>
+    <p>From Roblox to Ring, Here’s Us.</p>
+  </header>
+
+  <div class="timeline">
+    <div class="event">
+      <h3>📅 February 8</h3>
+      <p>The day we met. Roblox? Fate? Definitely both 😎</p>
+    </div>
+
+    <div class="event">
+      <h3>❤️ February 14</h3>
+      <p>Our first time. Yes, it was magical and yes, you were hot 😭</p>
+    </div>
+
+    <div class="event">
+      <h3>🫶 March 7</h3>
+      <p>We made it official 💞 You said yes. Best “yes” ever.</p>
+    </div>
+
+    <div class="event">
+      <h3>💬 March 30 @ 1:05AM</h3>
+      <p>First “I love yous.” Our hearts said it before our mouths did 🥺</p>
+    </div>
+
+    <div class="event">
+      <h3>👶 July 7</h3>
+      <p>You told me about the baby. I never stopped loving you, not even for a second 🫂</p>
+    </div>
+
+    <div class="event">
+      <h3>🦎 June 26</h3>
+      <p>Kiki’s birthday. The queen of lizard sass 🙀</p>
+    </div>
+
+    <div class="event">
+      <h3>🐱 August 16</h3>
+      <p>Finn’s birthday. The spoiled king who gets more cuddles than me 😔</p>
+    </div>
+  </div>
+
+  <div id="promise">
+    <h2>💍 My Promise to You 💍</h2>
+    <p>
+      This ring is more than metal and stone. It’s my promise to stay by you —  
+      whether you’re blasting music in the car, beating me in Fortnite, or just need  
+      a hug from behind. I’ll always love you, no matter what. 😔💖  
+    </p>
+    <p>
+      Now let’s eat cookie cake and watch Shameless together 😭
+    </p>
+  </div>
+
+  <div class="footer">
+    Made with Monster cans, loud music, and hella love. 💘
+  </div>
+
+  <!-- Floating emojis (funny + romantic + chaotic) -->
+  <script>
+    const emojis = ["😼", "🙀", "💍", "🌝", "💔", "😭", "😔", "😎", "🫂", "💖", "🎮", "🍪"];
+    for (let i = 0; i < 30; i++) {
+      const emoji = document.createElement("div");
+      emoji.className = "floating-emoji";
+      emoji.style.left = Math.random() * 100 + "vw";
+      emoji.style.animationDuration = (6 + Math.random() * 5) + "s";
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      document.body.appendChild(emoji);
+    }
+  </script>
+
+</body>
+</html>
