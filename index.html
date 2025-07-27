@@ -107,17 +107,24 @@
 
     /* Modal */
     #ringModal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0, 0, 0, 0.9);
-      z-index: 999;
-      justify-content: center;
-      align-items: center;
-      box-sizing: border-box;
-    }
+  visibility: hidden;
+  opacity: 0;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  transition: opacity 0.4s ease;
+}
+#ringModal.show {
+  visibility: visible;
+  opacity: 1;
+  display: flex;
+}
 
     #ringModal img {
       max-width: 300px;
@@ -246,14 +253,16 @@
       document.body.appendChild(emoji);
     }
 
-    function showModal() {
-      document.getElementById('ringModal').style.display = 'flex';
-    }
+   function showModal() {
+  const modal = document.getElementById('ringModal');
+  modal.classList.add('show');
+}
 
-    function closeModal() {
-      document.getElementById('ringModal').style.display = 'none';
-      document.getElementById('ringRevealFinal').style.display = 'block';
-    }
+function closeModal() {
+  const modal = document.getElementById('ringModal');
+  modal.classList.remove('show');
+  document.getElementById('ringRevealFinal').style.display = 'block';
+}
   </script>
 
 </body>
