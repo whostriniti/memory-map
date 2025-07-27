@@ -80,7 +80,7 @@
 
     @keyframes float {
       0% { transform: translateY(100vh) rotate(0deg); }
-      100% { transform: translateY(-100vh) rotate(360deg); }
+      100% { transform: translateY(-10vh) rotate(360deg); }
     }
 
     .reveal-container {
@@ -243,11 +243,9 @@
   }
 
   function closeModal() {
-    document.getElementById('ringModal').style.display = 'none';
-    const ringFinal = document.getElementById('ringRevealFinal');
-    ringFinal.style.display = 'block';
-    ringFinal.scrollIntoView({ behavior: "smooth", block: "center" });
-    spawnEmojis();
+   document.getElementById('ringModal').style.display = 'none';
+  document.getElementById('ringRevealFinal').style.display = 'block';
+  spawnEmojis(); 
   }
 
   document.addEventListener("DOMContentLoaded", () => {
