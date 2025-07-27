@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Story of Us 💙</title>
   <style>
     body {
@@ -14,12 +15,17 @@
 
     header {
       text-align: center;
-      padding: 50px 20px;
+      padding: 50px 20px 30px;
     }
 
     header h1 {
-      font-size: 3em;
+      font-size: 2.5em;
       color: #00ccff;
+    }
+
+    header p {
+      font-size: 1.1em;
+      color: #ccc;
     }
 
     .timeline {
@@ -30,7 +36,7 @@
 
     .event {
       background: #111;
-      margin: 20px 0;
+      margin: 20px 15px;
       padding: 15px 20px;
       border-left: 5px solid #00ccff;
       border-radius: 5px;
@@ -38,7 +44,7 @@
 
     .event h3 {
       margin: 0;
-      font-size: 1.4em;
+      font-size: 1.3em;
       color: #ff69b4;
     }
 
@@ -46,28 +52,15 @@
       margin: 5px 0 0;
     }
 
-    .floating-emoji {
-      position: fixed;
-      font-size: 2rem;
-      animation: float 10s linear infinite;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(100vh) rotate(0deg); }
-      100% { transform: translateY(-100vh) rotate(360deg); }
-    }
-
     #promise {
       background: #222;
-      margin: 40px auto;
+      margin: 40px 15px;
       max-width: 700px;
       padding: 30px;
       border-radius: 10px;
       border: 2px dashed #ff1493;
       text-align: center;
-      font-size: 1.2em;
+      font-size: 1.1em;
     }
 
     .footer {
@@ -76,72 +69,114 @@
       font-size: 0.9em;
       color: gray;
     }
+
+    .floating-emoji {
+      position: fixed;
+      font-size: 2rem;
+      animation: float 10s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); }
+      100% { transform: translateY(-100vh) rotate(360deg); }
+    }
+
+    /* Reveal Ring Button */
+    .reveal-container {
+      text-align: center;
+      margin: 50px 15px;
+    }
+
+    .reveal-button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .reveal-button:hover {
+      background-color: #ff1493;
+      transform: scale(1.05);
+    }
+
+    .ring-image {
+      margin-top: 20px;
+      display: none;
+      animation: sparkle 2s ease-in-out;
+      max-width: 300px;
+      width: 80%;
+    }
+
+    @keyframes sparkle {
+      0% { opacity: 0; transform: scale(0.5); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Mobile optimization */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2em;
+      }
+      .event h3 {
+        font-size: 1.1em;
+      }
+      .reveal-button {
+        font-size: 1em;
+        padding: 12px 20px;
+      }
+    }
   </style>
 </head>
 <body>
 
+  <!-- Background Music -->
+  <audio autoplay loop>
+    <source src="ylimd8bit.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
   <header>
     <h1>🌌 The Story of Us 😼💍</h1>
-    <p>From Roblox to Ring, Here’s Us.</p>
+    <p>From Roblox to Rings and Ridiculous Laughs</p>
   </header>
 
   <div class="timeline">
-    <div class="event">
-      <h3>📅 February 8</h3>
-      <p>The day we met. Roblox? Fate? Definitely both 😎</p>
-    </div>
-
-    <div class="event">
-      <h3>❤️ February 14</h3>
-      <p>Our first time. Yes, it was magical and yes, you were hot 😭</p>
-    </div>
-
-    <div class="event">
-      <h3>🫶 March 7</h3>
-      <p>We made it official 💞 You said yes. Best “yes” ever.</p>
-    </div>
-
-    <div class="event">
-      <h3>💬 March 30 @ 1:05AM</h3>
-      <p>First “I love yous.” Our hearts said it before our mouths did 🥺</p>
-    </div>
-
-    <div class="event">
-      <h3>👶 July 7</h3>
-      <p>You told me about the baby. I never stopped loving you, not even for a second 🫂</p>
-    </div>
-
-    <div class="event">
-      <h3>🦎 June 26</h3>
-      <p>Kiki’s birthday. The queen of lizard sass 🙀</p>
-    </div>
-
-    <div class="event">
-      <h3>🐱 August 16</h3>
-      <p>Finn’s birthday. The spoiled king who gets more cuddles than me 😔</p>
-    </div>
+    <div class="event"><h3>📅 Feb 8</h3><p>We met. Chaos and love were born 😎</p></div>
+    <div class="event"><h3>❤️ Feb 14</h3><p>Our first time. Emotional damage (in a good way) 💘</p></div>
+    <div class="event"><h3>🫶 Mar 7</h3><p>We made it official 💏</p></div>
+    <div class="event"><h3>💬 Mar 30 @ 1:05AM</h3><p>Our first “I love yous” 🥺</p></div>
+    <div class="event"><h3>👶 July 7</h3><p>You trusted me with the deepest part of you 😔</p></div>
+    <div class="event"><h3>🦎 June 26</h3><p>Kiki’s birthday — royalty with claws 🙀</p></div>
+    <div class="event"><h3>🐱 Aug 16</h3><p>Finn was born. And instantly spoiled 😼</p></div>
   </div>
 
   <div id="promise">
-    <h2>💍 My Promise to You 💍</h2>
+    <h2>💍 My Promise</h2>
     <p>
-      This ring is more than metal and stone. It’s my promise to stay by you —  
-      whether you’re blasting music in the car, beating me in Fortnite, or just need  
-      a hug from behind. I’ll always love you, no matter what. 😔💖  
+      This isn’t just a ring. It’s the moment I said: “You're it for me.”  
+      Through Roblox, loud car rides, Monster cans, and your chaotic emojis, I’m here.  
+      Always. 🙏😭🌝💖
     </p>
-    <p>
-      Now let’s eat cookie cake and watch Shameless together 😭
-    </p>
+  </div>
+
+  <div class="reveal-container">
+    <button class="reveal-button" onclick="document.getElementById('ring').style.display='block'">💖 Click to Reveal Your Ring 💖</button>
+    <img id="ring" class="ring-image" src="https://i.imgur.com/oSgEjWc.png" alt="Promise Ring">
   </div>
 
   <div class="footer">
-    Made with Monster cans, loud music, and hella love. 💘
+    Made with croissants, Monster cans, and love. 🍪💘
   </div>
 
-  <!-- Floating emojis (funny + romantic + chaotic) -->
   <script>
-    const emojis = ["😼", "🙀", "💍", "🌝", "💔", "😭", "😔", "😎", "🫂", "💖", "🎮", "🍪"];
-    for (let i = 0; i < 30; i++) {
+    const emojis = ["😼", "🙀", "💍", "🌝", "💔", "😭", "😔", "🫂", "🎮", "🍪"];
+    for (let i = 0; i < 25; i++) {
       const emoji = document.createElement("div");
       emoji.className = "floating-emoji";
       emoji.style.left = Math.random() * 100 + "vw";
