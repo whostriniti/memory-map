@@ -11,18 +11,6 @@
       font-family: 'Segoe UI', sans-serif;
       color: white;
       overflow-x: hidden;
-
-      .ring-image.hidden {
-  display: none;
-}
-
-.ring-image.visible {
-  display: block;
-  animation: sparkle 2s ease-in-out;
-  max-width: 300px;
-  width: 80%;
-  margin-top: 20px;
-}
     }
 
     header {
@@ -117,21 +105,37 @@
       transform: scale(1.05);
     }
 
-    .ring-image.hidden {
-  display: none;
-}
+    /* Modal for ring */
+    #ringModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+    }
 
-.ring-image.visible {
-  display: block;
-  animation: sparkle 2s ease-in-out;
-  max-width: 300px;
-  width: 80%;
-  margin-top: 20px;
-}
+    #ringModal img {
+      max-width: 300px;
+      width: 80%;
+      border-radius: 12px;
+      animation: popIn 0.5s ease;
+    }
 
-    @keyframes sparkle {
-      0% { opacity: 0; transform: scale(0.5); }
-      100% { opacity: 1; transform: scale(1); }
+    @keyframes popIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Final ring display */
+    #ringRevealFinal {
+      display: none;
+      margin-top: 20px;
+      max-width: 200px;
+      width: 80%;
     }
 
     .bg-image {
@@ -165,26 +169,29 @@
 </head>
 <body>
 
-  <!-- Background music (starts on click) -->
+  <!-- Music -->
   <audio id="bg-music" loop>
     <source src="ylimd8bit.mp3" type="audio/mpeg" />
     Your browser does not support the audio element.
   </audio>
 
-  <!-- Floating Background Graphics (Roblox + Fortnite) -->
+  <!-- Background Images -->
   <div class="floating-bg">
     <img src="https://i.imgur.com/ehkE97C.png" class="bg-image" style="top: 10%; left: 5%;" />
     <img src="https://i.imgur.com/ghpIqEk.png" class="bg-image" style="top: 50%; left: 80%;" />
     <img src="https://i.imgur.com/yT2CEXS.png" class="bg-image" style="top: 75%; left: 20%;" />
   </div>
 
-  <!-- Page Header -->
+  <!-- Modal Ring -->
+  <div id="ringModal" onclick="closeModal()">
+    <img src="ring.png" alt="Promise Ring">
+  </div>
+
   <header>
     <h1>🌌 The Story of Us 😼💍</h1>
     <p>From Roblox to Rings and Ridiculous Laughs</p>
   </header>
 
-  <!-- Relationship Timeline -->
   <div class="timeline">
     <div class="event"><h3>📅 Feb 8</h3><p>We met. Chaos and love were born 😎</p></div>
     <div class="event"><h3>❤️ Feb 14</h3><p>Our first time. Emotional damage (in a good way) 💘</p></div>
@@ -195,7 +202,6 @@
     <div class="event"><h3>🐱 Aug 16</h3><p>Finn was born. And instantly spoiled 😼</p></div>
   </div>
 
-  <!-- Promise Section -->
   <div id="promise">
     <h2>💍 My Promise</h2>
     <p>
@@ -205,25 +211,18 @@
     </p>
   </div>
 
-  <!-- Music and Ring Reveal -->
- <div class="reveal-container">
-  <button class="music-button" onclick="document.getElementById('bg-music').play()">▶️ Play Our Song</button>
-  <button class="reveal-button" onclick="
-    document.getElementById('ring').classList.remove('hidden');
-    document.getElementById('ring').classList.add('visible');
-  ">💖 Click to Reveal Your Ring 💖</button>
+  <div class="reveal-container">
+    <button class="music-button" onclick="document.getElementById('bg-music').play()">▶️ Play Our Song</button>
+    <button class="reveal-button" onclick="showModal()">💖 Click to Reveal Your Ring 💖</button>
+    <img id="ringRevealFinal" src="ring.png" alt="Promise Ring Final Position">
+  </div>
 
-  <img id="ring" class="ring-image hidden" src="ring.png" alt="Promise Ring">
-</div>
-
-
-  <!-- Footer -->
   <div class="footer">
     Made with croissants, Monster cans, and love. 🍪💘
   </div>
 
-  <!-- Floating Emojis Script -->
   <script>
+    // Floating Emojis
     const emojis = ["😼", "🙀", "💍", "🌝", "💔", "😭", "😔", "🫂", "🎮", "🍪"];
     for (let i = 0; i < 25; i++) {
       const emoji = document.createElement("div");
@@ -232,6 +231,16 @@
       emoji.style.animationDuration = (6 + Math.random() * 5) + "s";
       emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
       document.body.appendChild(emoji);
+    }
+
+    // Show modal then reveal ring
+    function showModal() {
+      document.getElementById('ringModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('ringModal').style.display = 'none';
+      document.getElementById('ringRevealFinal').style.display = 'block';
     }
   </script>
 
