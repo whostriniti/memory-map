@@ -71,6 +71,23 @@
   height: 100vh;
   background: black;
 }
+    #moon {
+  position: fixed;
+  top: 25px;
+  right: 30px;
+  width: 110px;
+  z-index: 2;
+  opacity: 0.9;
+  pointer-events: none;
+  animation: glow 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7));
+}
+
+@keyframes glow {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.03); }
+}
+
 
 
     .footer {
@@ -188,6 +205,8 @@
   </style>
 </head>
 <body>
+  <img src="images/moon2.avif" id="moon" alt="Moon">
+
 <canvas id="starCanvas"></canvas>
 
 <!-- Music -->
