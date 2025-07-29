@@ -685,8 +685,15 @@ function animate() {
 }
     animate();
 function openLoveLetter() {
-  document.getElementById("loveLetterModal").style.display = "flex";
-   startSparkleEffect();
+ const modal = document.getElementById("loveLetterModal");
+  modal.style.display = "flex";
+
+  // Wait for display to take effect, then resize and start
+  setTimeout(() => {
+    resizeSparkleCanvas();
+    sparkles = Array.from({ length: 50 }, createSparkle);
+    drawSparkles();
+  }, 50);
 }
 
 function closeLoveLetter() {
@@ -746,11 +753,6 @@ function drawSparkles() {
   requestAnimationFrame(drawSparkles);
 }
 
-function startSparkleEffect() {
-  resizeSparkleCanvas();
-  sparkles = Array.from({ length: 50 }, createSparkle);
-  drawSparkles();
-}
 
 const loveModal = document.getElementById("loveLetterModal");
 loveModal.addEventListener("click", resizeSparkleCanvas);
