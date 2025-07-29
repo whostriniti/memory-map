@@ -565,7 +565,63 @@
 
  document.addEventListener("DOMContentLoaded", () => {
   spawnEmojis();
-  document.getElementById("revealBtn").addEventListener("click", showModal);
+   document.getElementById("revealBtn").addEventListener("click", showModal);
+
+  // Sparkle setup
+  const canvas = document.getElementById("sparkleCanvas");
+  const ctx = canvas.getContext("2d");
+  let sparkles = [];
+
+  function resizeSparkleCanvas() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+
+  function createSparkle() {
+    return {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 1.5 + 0.5,
+      opacity: Math.random() * 0.5 + 0.5,
+      speedY: Math.random() * 0.5 + 0.2,
+      life: 0,
+      maxLife: 80 + Math.random() * 20
+    };
+  }
+
+  function drawSparkles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    sparkles.forEach((s, i) => {
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${s.opacity})`;
+      ctx.fill();
+      s.y -= s.speedY;
+      s.life++;
+      if (s.life > s.maxLife) sparkles[i] = createSparkle();
+    });
+    requestAnimationFrame(drawSparkles);
+  }
+
+  function startSparkles() {
+    resizeSparkleCanvas();
+    sparkles = Array.from({ length: 50 }, createSparkle);
+    drawSparkles();
+  }
+
+  // Hook into modal open
+  window.openLoveLetter = function () {
+    const modal = document.getElementById("loveLetterModal");
+    modal.style.display = "flex";
+    setTimeout(startSparkles, 50);
+  };
+
+  window.closeLoveLetter = function () {
+    document.getElementById("loveLetterModal").style.display = "none";
+  };
+
+  window.addEventListener("resize", resizeSparkleCanvas);
+});
 });
 
 function closeModal() {
