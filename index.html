@@ -303,6 +303,74 @@
     font-size: 1.3rem;
   }
 }
+.love-letter-button {
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  font-size: 1.1em;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 10px;
+  transition: background 0.3s ease;
+}
+
+.love-letter-button:hover {
+  background-color: #ff1493;
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 200;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #111;
+  margin: auto;
+  padding: 30px 20px;
+  border-radius: 10px;
+  max-width: 90%;
+  width: 400px;
+  color: white;
+  box-shadow: 0 0 20px #ff69b4;
+  animation: fadeIn 0.5s ease;
+  text-align: center;
+}
+
+.modal-content h2 {
+  color: #ff69b4;
+  margin-bottom: 15px;
+}
+
+.modal-content p {
+  font-size: 1em;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
 
   </style>
 </head>
@@ -380,6 +448,7 @@
   <button class="music-button" onclick="document.getElementById('bg-music').play()">▶️ Play Our Song</button>
   <button class="reveal-button" id="revealBtn">💖 Click to Reveal Your Ring 💖</button>
   <img id="ringRevealFinal" src="images/ring.png" alt="Promise Ring Final Position">
+   <button class="love-letter-button" onclick="openLoveLetter()">💌 Read My Love Letter</button>
 </div>
 
 <div class="footer">
@@ -528,8 +597,30 @@ function animate() {
   requestAnimationFrame(animate);
 }
     animate();
+function openLoveLetter() {
+  document.getElementById("loveLetterModal").style.display = "flex";
+}
+
+function closeLoveLetter() {
+  document.getElementById("loveLetterModal").style.display = "none";
+}
 
 </script>
+<div id="loveLetterModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeLoveLetter()">&times;</span>
+    <h2>💌 To My Triniti</h2>
+    <p>
+      Every moment with you feels like stardust in my chest.  
+      From Roblox to the deepest conversations, from your loudest laugh to your quietest sighs — I love it all.  
+      I don’t just love you — I’m in love with every part of your soul.  
+      You made me believe in forever, and I can’t wait to grow old with you.  
+      This ring, this site, this everything — it’s all for you.  
+      💍💙 Forever yours,<br>
+      — Naimul
+    </p>
+  </div>
+</div>
 
 
 </body>
