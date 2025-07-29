@@ -606,9 +606,8 @@ function closeLoveLetter() {
 }
 
 </script>
-<div id="loveLetterModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeLoveLetter()">&times;</span>
+<div id="loveLetterModal" class="modal" onclick="closeLoveLetter()">
+  <div class="modal-content" onclick="event.stopPropagation()">
     <h2>💌 To My Triniti</h2>
     <p>
       Every moment with you feels like stardust in my chest.  
@@ -621,6 +620,7 @@ function closeLoveLetter() {
     </p>
   </div>
 </div>
+
 
 
 </body>
