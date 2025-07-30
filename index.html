@@ -62,42 +62,42 @@
       text-align: center;
       font-size: 1.1em;
     }
-
     #starCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -2;
-      width: 100vw;
-      height: 100vh;
-      background: black;
-    }
-
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+}
     #moon {
-      position: fixed;
-      top: 7%;
-      right: 5%;
-      width: 300px;
-      max-width: 30vw;
-      z-index: 2;
-      opacity: 1;
-      pointer-events: none;
-      animation: glow 4s ease-in-out infinite;
-      filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7));
-    }
+  position: fixed;
+  top: 7%;
+  right: 5%;
+  width: 300px;
+  max-width: 30vw;
+  z-index: 2;
+  opacity: 1;
+  pointer-events: none;
+  animation: glow 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7));
+}
 
     @media (max-width: 600px) {
-      #moon {
-        width: 90px;
-        top: -1%;
-        right: 0%;
-      }
-    }
+  #moon {
+    width: 90px;           
+    top: -1%;
+    right: 0%;
+  }
+}
 
-    @keyframes glow {
-      0%, 100% { opacity: 0.85; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.03); }
-    }
+@keyframes glow {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.03); }
+}
+
+
 
     .footer {
       text-align: center;
@@ -179,19 +179,19 @@
     }
 
     .bg-image {
-      position: fixed;
-      width: 150px;
-      opacity: 0.5;
-      z-index: 0;
-      animation: floatSlow 10s infinite ease-in-out;
-      pointer-events: none;
-    }
-
+  position: fixed;
+  width: 150px;             
+  opacity: 0.5;           
+  z-index: 0;
+  animation: floatSlow 10s infinite ease-in-out;
+  pointer-events: none;
+}
     @keyframes floatSlow {
       0% { transform: translateY(0px) rotate(0deg); }
       50% { transform: translateY(-20px) rotate(5deg); }
       100% { transform: translateY(0px) rotate(0deg); }
     }
+
     @media (max-width: 600px) {
       header h1 {
         font-size: 2em;
@@ -205,414 +205,495 @@
       }
     }
 
-    @media (max-width: 600px) {
-      .bg-image {
-        width: 100px;
-        opacity: 0.5;
-      }
+     @media (max-width: 600px) {
+    .bg-image {
+      width: 100px;      
+      opacity: 0.5;
     }
+  }
+
+    /* Tablet view: width ≤ 768px */
+@media (max-width: 768px) {
+  .timeline, #promise {
+    padding: 15px;
+    margin: 20px 10px;
+  }
+
+  .event {
+    margin: 15px 10px;
+    padding: 12px 15px;
+  }
+
+  header {
+    padding: 40px 10px 20px;
+  }
+
+  header h1 {
+    font-size: 1.8em;
+  }
+
+  header p {
+    font-size: 1em;
+  }
+
+  .reveal-container {
+    margin: 30px 10px;
+  }
+
+  .reveal-button, .music-button {
+    font-size: 1em;
+    padding: 12px 18px;
+  }
+
+  #ringModal img {
+    max-width: 250px;
+    width: 85%;
+  }
+
+  #ringRevealFinal {
+    max-width: 180px;
+    width: 70%;
+  }
+
+  #moon {
+    width: 80px;
+    top: 2%;
+    right: 3%;
+  }
+
+  .bg-image {
+    width: 70px !important;
+    max-width: 15vw;
+  }
+
+  .floating-emoji {
+    font-size: 1.5rem;
+  }
+}
+
+/* Mobile view: width ≤ 480px */
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.6em;
+  }
+
+  .event h3 {
+    font-size: 1em;
+  }
+
+  #ringModal img {
+    max-width: 200px;
+    width: 90%;
+  }
+
+  #moon {
+    width: 65px;
+    top: 0%;
+    right: 2%;
+  }
+
+  .bg-image {
+    width: 100px !important;
+    max-width: 25vw;
+    top: auto
+    left: auto
+  }
+
+  .floating-emoji {
+    font-size: 1.3rem;
+  }
+}
+.love-letter-button {
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  font-size: 1.1em;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 10px;
+  transition: background 0.3s ease;
+}
+
+.love-letter-button:hover {
+  background-color: #ff1493;
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 200;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #111;
+  margin: auto;
+  padding: 30px 20px;
+  border-radius: 10px;
+  max-width: 90%;
+  width: 400px;
+  color: white;
+  box-shadow: 0 0 20px #ff69b4;
+  animation: fadeIn 0.5s ease;
+  text-align: center;
+}
+
+.modal-content h2 {
+  color: #ff69b4;
+  margin-bottom: 15px;
+}
+
+.modal-content p {
+  font-size: 1em;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
 
     @media (max-width: 768px) {
-      .timeline, #promise {
-        padding: 15px;
-        margin: 20px 10px;
-      }
+  .modal-content {
+    width: 85%;
+    padding: 25px 20px;
+    font-size: 1em;
+    line-height: 1.6em;
+  }
 
-      .event {
-        margin: 15px 10px;
-        padding: 12px 15px;
-      }
+  .modal-content h2 {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+  }
 
-      header {
-        padding: 40px 10px 20px;
-      }
+  .modal-content p {
+    font-size: 1em;
+  }
+}
 
-      header h1 {
-        font-size: 1.8em;
-      }
+@media (max-width: 480px) {
+  .modal-content {
+    width: 90%;
+    padding: 20px 15px;
+    font-size: 0.95em;
+    line-height: 1.55em;
+  }
 
-      header p {
-        font-size: 1em;
-      }
+  .modal-content h2 {
+    font-size: 1.15em;
+    margin-bottom: 12px;
+  }
 
-      .reveal-container {
-        margin: 30px 10px;
-      }
+  .modal-content p {
+    font-size: 0.9em;
+  }
+}
+@media (max-width: 768px) {
+  .modal-content {
+    width: 85%;
+    padding: 25px 20px;
+    font-size: 1em;
+    line-height: 1.6em;
+  }
 
-      .reveal-button, .music-button {
-        font-size: 1em;
-        padding: 12px 18px;
-      }
+  .modal-content h2 {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+  }
 
-      #ringModal img {
-        max-width: 250px;
-        width: 85%;
-      }
+  .modal-content p {
+    font-size: 1em;
+  }
+}
 
-      #ringRevealFinal {
-        max-width: 180px;
-        width: 70%;
-      }
+@media (max-width: 480px) {
+  .modal-content {
+    width: 90%;
+    padding: 20px 15px;
+    font-size: 0.95em;
+    line-height: 1.55em;
+  }
 
-      #moon {
-        width: 80px;
-        top: 2%;
-        right: 3%;
-      }
+  .modal-content h2 {
+    font-size: 1.15em;
+    margin-bottom: 12px;
+  }
 
-      .bg-image {
-        width: 70px !important;
-        max-width: 15vw;
-      }
+  .modal-content p {
+    font-size: 0.9em;
+  }
+}
 
-      .floating-emoji {
-        font-size: 1.5rem;
-      }
-    }
 
-    @media (max-width: 480px) {
-      header h1 {
-        font-size: 1.6em;
-      }
-
-      .event h3 {
-        font-size: 1em;
-      }
-
-      #ringModal img {
-        max-width: 200px;
-        width: 90%;
-      }
-
-      #moon {
-        width: 65px;
-        top: 0%;
-        right: 2%;
-      }
-
-      .bg-image {
-        width: 100px !important;
-        max-width: 25vw;
-        top: auto;
-        left: auto;
-      }
-
-      .floating-emoji {
-        font-size: 1.3rem;
-      }
-    }
-
-    .love-letter-button {
-      background-color: #ff69b4;
-      color: white;
-      border: none;
-      padding: 14px 24px;
-      font-size: 1.1em;
-      border-radius: 10px;
-      cursor: pointer;
-      margin: 10px;
-      transition: background 0.3s ease;
-    }
-
-    .love-letter-button:hover {
-      background-color: #ff1493;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 200;
-      left: 0;
-      top: 0;
-      width: 100vw;
-      height: 100vh;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.85);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background-color: #111;
-      margin: auto;
-      padding: 30px 20px;
-      border-radius: 10px;
-      max-width: 90%;
-      width: 400px;
-      color: white;
-      box-shadow: 0 0 20px #ff69b4;
-      animation: fadeIn 0.5s ease;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    .modal-content h2 {
-      color: #ff69b4;
-      margin-bottom: 15px;
-    }
-
-    .modal-content p {
-      font-size: 1em;
-      line-height: 1.6;
-      white-space: pre-line;
-    }
-
-    .sparkle-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to   { opacity: 1; transform: scale(1); }
-    }
   </style>
 </head>
+  
 <body>
   <img src="images/moon.png" id="moon" alt="Moon">
 
-  <canvas id="starCanvas"></canvas>
+<canvas id="starCanvas"></canvas>
 
-  <!-- Music -->
-  <audio id="bg-music" loop>
-    <source src="ylimd8bit.mp3" type="audio/mpeg" />
-  </audio>
+<!-- Music -->
+<audio id="bg-music" loop>
+  <source src="ylimd8bit.mp3" type="audio/mpeg" />
+</audio>
 
-  <!-- Background Emojis and Images -->
-  <div class="floating-bg">
-    <img src="images/sc1.png" class="bg-image" style="top: 26%; left: 9%;" alt="Snapchat 1" />
-    <img src="images/dlus4.png" class="bg-image" style="top: 61%; left: 65%;" alt="Us 4" />
-    <img src="images/roblox.png" class="bg-image" style="top: 60%; left: 15%;" alt="Roblox" />
-    <img src="images/sc2.png" class="bg-image" style="top: 44%; left: 70%;" alt="Snapchat 2" />
-    <img src="images/us1.png" class="bg-image" style="top: 27%; left: 27%;" alt="Us 1" />
-    <img src="images/finn.png" class="bg-image" style="top: 60%; left: 40%;" alt="Finn" />
-    <img src="images/sc3.png" class="bg-image" style="top: 27%; left: 45%;" alt="Snapchat 3" />
-    <img src="images/us5.png" class="bg-image" style="top: 44%; left: 42%;" alt="Us 5" />
-    <img src="images/us2.png" class="bg-image" style="top: 27%; left: 70%;" alt="Us 2" />
-    <img src="images/kiki.png" class="bg-image" style="top: 42%; left: 17%;" alt="Kiki" />
-    <img src="images/fortnite.png" class="bg-image" style="top: 81%; left: 40%;" alt="Fortnite" />
-    <img src="images/maxx.png" class="bg-image" style="top: 81%; left: 15%;" alt="Maxx" />
-    <img src="images/sc4.png" class="bg-image" style="top: 81%; left: 65%;" alt="Snapchat 4" />
-  </div>
+<!-- Background Emojis and Images -->
+<div class="floating-bg">
+  
+  <img src="images/roblox.png" class="bg-image" style="top: 26%; left: 9%;" alt="Roblox" />
+  
+  <img src="images/dlus4.png" class="bg-image" style="top: 61%; left: 65%;" alt="Us 4" />
+  
+  <img src="images/sc1.png" class="bg-image" style="top: 60%; left: 15%;" alt="Snapchat 1" />
+  
+  <img src="images/sc2.png" class="bg-image" style="top: 44%; left: 70%;" alt="Snapchat 2" />
+  
+  <img src="images/us1.png" class="bg-image" style="top: 27%; left: 27%;" alt="Us 1" />
+  
+  <img src="images/finn.png" class="bg-image" style="top: 60%; left: 40%;" alt="Finn" />
+  
+  <img src="images/sc3.png" class="bg-image" style="top: 27%; left: 45%;" alt="Snapchat 3" />
+  
+  <img src="images/us5.png" class="bg-image" style="top: 44%; left: 42%;" alt="Us 5" />
+  
+  <img src="images/us2.png" class="bg-image" style="top: 27%; left: 70%;" alt="Us 2" />
+  
+  <img src="images/kiki.png" class="bg-image" style="top: 42%; left: 17%;" alt="Kiki" />
 
-  <!-- Ring Modal -->
-  <div id="ringModal" onclick="closeModal()">
-    <img src="images/ring.png" alt="Promise Ring">
-  </div>
+  
+  <img src="images/fortnite.png" class="bg-image" style="top: 81%; left: 40%;" alt="Fortnite" />
+   <img src="images/maxx.png" class="bg-image" style="top: 81%; left: 15%;" alt="Maxx" />
+   <img src="images/sc4.png" class="bg-image" style="top: 81%; left: 65%;" alt="Snapchat 4" />
+  
+</div>
 
-  <header>
-    <h1>🌌 The Story of Us 😼💍</h1>
-    <p>From Roblox to Rings and Ridiculous Laughs</p>
-  </header>
+<!-- Ring Modal -->
+<div id="ringModal" onclick="closeModal()">
+  <img src="images/ring.png" alt="Promise Ring">
+</div>
 
-  <div class="timeline">
-    <div class="event"><h3>📅 Feb 8</h3><p>We met. Chaos and love were born 😎</p></div>
-    <div class="event"><h3>❤️ Feb 14</h3><p>Our first time. Emotional damage (in a good way) 💘</p></div>
-    <div class="event"><h3>🫶 Mar 7</h3><p>We made it official 💏</p></div>
-    <div class="event"><h3>💬 Mar 30 @ 1:05AM</h3><p>Our first “I love yous” 🥺</p></div>
-    <div class="event"><h3>👶 July 7</h3><p>You trusted me with the deepest part of you 😔</p></div>
-    <div class="event"><h3>🦎 June 26</h3><p>Kiki’s birthday — royalty with claws 🙀</p></div>
-    <div class="event"><h3>🐱 Aug 16</h3><p>Finn was born. And instantly spoiled 😼</p></div>
-  </div>
+<header>
+  <h1>🌌 The Story of Us 😼💍</h1>
+  <p>From Roblox to Rings and Ridiculous Laughs</p>
+</header>
 
-  <div id="promise">
-    <h2>💍 My Promise</h2>
+<div class="timeline">
+  <div class="event"><h3>📅 Feb 8</h3><p>We met. Chaos and love were born 😎</p></div>
+  <div class="event"><h3>❤️ Feb 14</h3><p>Our first time. Emotional damage (in a good way) 💘</p></div>
+  <div class="event"><h3>🫶 Mar 7</h3><p>We made it official 💏</p></div>
+  <div class="event"><h3>💬 Mar 30 @ 1:05AM</h3><p>Our first “I love yous” 🥺</p></div>
+  <div class="event"><h3>👶 July 7</h3><p>You trusted me with the deepest part of you 😔</p></div>
+  <div class="event"><h3>🦎 June 26</h3><p>Kiki’s birthday — royalty with claws 🙀</p></div>
+  <div class="event"><h3>🐱 Aug 16</h3><p>Finn was born. And instantly spoiled 😼</p></div>
+</div>
+
+<div id="promise">
+  <h2>💍 My Promise</h2>
+  <p>
+    This isn’t just a ring. It’s the moment I said: “You're it for me.”  
+    Through Roblox, loud car rides, Monster cans, and your chaotic emojis, I’m here.  
+    Always. 🙏😭🌝💖
+  </p>
+</div>
+
+<div class="reveal-container">
+  <button class="music-button" onclick="document.getElementById('bg-music').play()">▶️ Play Our Song</button>
+  <button class="reveal-button" id="revealBtn">💖 Click to Reveal Your Ring 💖</button>
+  <img id="ringRevealFinal" src="images/ring.png" alt="Promise Ring Final Position">
+   <button class="love-letter-button" onclick="openLoveLetter()">💌 Read My Love Letter</button>
+</div>
+
+<div class="footer">
+  Made with croissants, Monster cans, and love. 🍪💘
+</div>
+
+<!-- JavaScript -->
+<script>
+  const emojis = ["😼", "🙀", "💍", "💞", "🌝", "😍", "😭", "😔", "🖤", "😡", "🎮", "🤍", "😁", "😘", "💖", "😜", "💞", "😩", "🤣", "💝", "🤩", "🥺", "👿", "💘", "🤟", "🤰", "🧡", "💉", "💎", "💫", "💻", "🚀", "🚗", "💕", "🐎", "🏍️", ];
+  function spawnEmojis() {
+    document.querySelectorAll('.floating-emoji').forEach(e => e.remove()); // Remove old emojis
+
+  for (let i = 0; i < 25; i++) {
+    const emoji = document.createElement("div");
+    emoji.className = "floating-emoji";
+    emoji.style.left = (5 + Math.random() * 90) + "vw"; // keep some margin
+    emoji.style.animationDuration = (6 + Math.random() * 3) + "s";
+    emoji.style.top = "100vh"; // Start from bottom
+    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    document.body.appendChild(emoji);
+    }
+  }
+
+  function showModal() {
+    document.getElementById('ringModal').style.display = 'flex';
+  }
+
+ document.addEventListener("DOMContentLoaded", () => {
+  spawnEmojis();
+  document.getElementById("revealBtn").addEventListener("click", showModal);
+});
+
+function closeModal() {
+  document.getElementById('ringModal').style.display = 'none';
+  document.getElementById('ringRevealFinal').style.display = 'block';
+  spawnEmojis(); // Re-spawn after modal
+}
+
+ 
+</script>
+
+  <script>
+  const canvas = document.getElementById("starCanvas");
+  const ctx = canvas.getContext("2d");
+  let stars = [];
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function createStars() {
+    stars = [];
+    for (let i = 0; i < 100; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 1.5 + 0.5,
+        alpha: 1 + Math.random() * 0.75,
+        delta: Math.random() * 0.02 + 0.005,
+      });
+    }
+  }
+
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let star of stars) {
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+      ctx.fill();
+      star.alpha += star.delta;
+      if (star.alpha <= 0 || star.alpha >= 1) {
+        star.delta *= -1;
+      }
+    }
+    requestAnimationFrame(drawStars);
+  }
+
+  window.addEventListener("resize", () => {
+    resizeCanvas();
+    createStars();
+  });
+
+  resizeCanvas();
+  createStars();
+  drawStars();
+    // Shooting stars logic
+const shootingStars = [];
+
+function createShootingStar() {
+  const startX = Math.random() * canvas.width;
+  const startY = Math.random() * canvas.height * 0.5; // top half of screen
+  const length = Math.random() * 80 + 100;
+  const speed = Math.random() * 8 + 10;
+
+  shootingStars.push({
+    x: startX,
+    y: startY,
+    length: length,
+    speed: speed,
+    life: 0,
+    maxLife: 30 + Math.random() * 10
+  });
+}
+
+// Modify animate function to include shooting stars
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Stars
+  for (let star of stars) {
+    star.alpha += star.delta;
+    if (star.alpha <= 0 || star.alpha >= 1) star.delta *= -1;
+
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+    ctx.fill();
+  }
+
+  // Shooting Stars
+  for (let i = shootingStars.length - 1; i >= 0; i--) {
+    const s = shootingStars[i];
+    s.x += s.speed;
+    s.y += s.speed;
+    s.life++;
+
+    ctx.beginPath();
+    ctx.moveTo(s.x, s.y);
+    ctx.lineTo(s.x - s.length, s.y - s.length);
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    if (s.life > s.maxLife) {
+      shootingStars.splice(i, 1); // remove it
+    }
+  }
+
+  // Occasionally launch a new shooting star
+  if (Math.random() < 0.04) {
+    createShootingStar();
+  }
+
+  requestAnimationFrame(animate);
+}
+    animate();
+function openLoveLetter() {
+  document.getElementById("loveLetterModal").style.display = "flex";
+}
+
+function closeLoveLetter() {
+  document.getElementById("loveLetterModal").style.display = "none";
+}
+
+</script>
+<div id="loveLetterModal" class="modal" onclick="closeLoveLetter()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h2>💌 To My Triniti</h2>
     <p>
-      This isn’t just a ring. It’s the moment I said: “You're it for me.”  
-      Through Roblox, loud car rides, Monster cans, and your chaotic emojis, I’m here.  
-      Always. 🙏😭🌝💖
+      Every moment with you feels like stardust in my chest.  
+      From Roblox to the deepest conversations, from your loudest laugh to your quietest sighs — I love it all.  
+      I don’t just love you — I’m in love with every part of your soul.  
+      You made me believe in forever, and I can’t wait to grow old with you.  
+      This ring, this site, this everything — it’s all for you.  
+      💍💙 Forever yours,<br>
+      — Naimul
     </p>
   </div>
+</div>
 
-  <div class="reveal-container">
-    <button class="music-button" onclick="document.getElementById('bg-music').play()">▶️ Play Our Song</button>
-    <button class="reveal-button" id="revealBtn">💖 Click to Reveal Your Ring 💖</button>
-    <img id="ringRevealFinal" src="images/ring.png" alt="Promise Ring Final Position">
-    <button class="love-letter-button" onclick="openLoveLetter()">💌 Read My Love Letter</button>
-  </div>
 
-  <div class="footer">
-    Made with croissants, Monster cans, and love. 🍪💘
-  </div>
-
-  <!-- Love Letter Modal -->
-  <div id="loveLetterModal" class="modal" onclick="closeLoveLetter()">
-    <canvas id="sparkleCanvas" class="sparkle-canvas"></canvas>
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <h2>💌 To My Triniti</h2>
-      <p>
-        Every moment with you feels like stardust in my chest.  
-        From Roblox to the deepest conversations, from your loudest laugh to your quietest sighs — I love it all.  
-        I don’t just love you — I’m in love with every part of your soul.  
-        You made me believe in forever, and I can’t wait to grow old with you.  
-        This ring, this site, this everything — it’s all for you.  
-        💍💙 Forever yours,<br>
-        — Naimul
-      </p>
-    </div>
-  </div>
-  <script>
-    const emojis = ["😼","🙀","💍","💞","🌝","😍","😭","😔","🖤","😡","🎮","🤍","😁","😘","💖","😜","💞","😩","🤣","💝","🤩","🥺","👿","💘","🤟","🤰","🧡","💉","💎","💫","💻","🚀","🚗","💕","🐎","🏍️"];
-
-    function spawnEmojis() {
-      document.querySelectorAll('.floating-emoji').forEach(e => e.remove());
-      for (let i = 0; i < 25; i++) {
-        const emoji = document.createElement("div");
-        emoji.className = "floating-emoji";
-        emoji.style.left = (5 + Math.random() * 90) + "vw";
-        emoji.style.animationDuration = (6 + Math.random() * 3) + "s";
-        emoji.style.top = "100vh";
-        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-        document.body.appendChild(emoji);
-      }
-    }
-
-    function closeModal() {
-      document.getElementById('ringModal').style.display = 'none';
-      document.getElementById('ringRevealFinal').style.display = 'block';
-      spawnEmojis();
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      spawnEmojis();
-      document.getElementById("revealBtn").addEventListener("click", () => {
-        document.getElementById("ringModal").style.display = 'flex';
-      });
-    });
-
-    // === Sparkles ===
-    let sparkleCanvas, sparkleCtx, sparkles = [];
-
-    function resizeSparkleCanvas() {
-      if (!sparkleCanvas) return;
-      sparkleCanvas.width = sparkleCanvas.offsetWidth;
-      sparkleCanvas.height = sparkleCanvas.offsetHeight;
-    }
-
-    function createSparkle() {
-      return {
-        x: Math.random() * sparkleCanvas.width,
-        y: Math.random() * sparkleCanvas.height,
-        radius: Math.random() * 1.5 + 0.5,
-        opacity: Math.random() * 0.5 + 0.5,
-        speedY: Math.random() * 0.5 + 0.2,
-        life: 0,
-        maxLife: 80 + Math.random() * 20
-      };
-    }
-
-    function drawSparkles() {
-      if (!sparkleCtx) return;
-      sparkleCtx.clearRect(0, 0, sparkleCanvas.width, sparkleCanvas.height);
-      sparkles.forEach((s, i) => {
-        sparkleCtx.beginPath();
-        sparkleCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-        sparkleCtx.fillStyle = `rgba(255, 255, 255, ${s.opacity})`;
-        sparkleCtx.fill();
-        s.y -= s.speedY;
-        s.life++;
-        if (s.life > s.maxLife) sparkles[i] = createSparkle();
-      });
-      requestAnimationFrame(drawSparkles);
-    }
-
-    function startSparkles() {
-      sparkleCanvas = document.getElementById("sparkleCanvas");
-      if (!sparkleCanvas) return;
-      sparkleCtx = sparkleCanvas.getContext("2d");
-      resizeSparkleCanvas();
-      sparkles = Array.from({ length: 50 }, createSparkle);
-      drawSparkles();
-    }
-
-    function openLoveLetter() {
-      document.getElementById("loveLetterModal").style.display = 'flex';
-      setTimeout(startSparkles, 100);
-    }
-
-    function closeLoveLetter() {
-      document.getElementById("loveLetterModal").style.display = 'none';
-    }
-
-    window.addEventListener("resize", resizeSparkleCanvas);
-
-    // === Stars and Shooting Stars ===
-    const starCanvas = document.getElementById("starCanvas");
-    const starCtx = starCanvas.getContext("2d");
-    let stars = [], shootingStars = [];
-
-    function resizeStarCanvas() {
-      starCanvas.width = window.innerWidth;
-      starCanvas.height = window.innerHeight;
-    }
-
-    function createStars() {
-      stars = [];
-      for (let i = 0; i < 100; i++) {
-        stars.push({
-          x: Math.random() * starCanvas.width,
-          y: Math.random() * starCanvas.height,
-          radius: Math.random() * 1.5 + 0.5,
-          alpha: 1 + Math.random() * 0.75,
-          delta: Math.random() * 0.02 + 0.005,
-        });
-      }
-    }
-
-    function drawStars() {
-      starCtx.clearRect(0, 0, starCanvas.width, starCanvas.height);
-      stars.forEach(star => {
-        star.alpha += star.delta;
-        if (star.alpha <= 0 || star.alpha >= 1) star.delta *= -1;
-        starCtx.beginPath();
-        starCtx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-        starCtx.fillStyle = `rgba(255,255,255,${star.alpha})`;
-        starCtx.fill();
-      });
-
-      for (let i = shootingStars.length - 1; i >= 0; i--) {
-        const s = shootingStars[i];
-        s.x += s.speed;
-        s.y += s.speed;
-        s.life++;
-        starCtx.beginPath();
-        starCtx.moveTo(s.x, s.y);
-        starCtx.lineTo(s.x - s.length, s.y - s.length);
-        starCtx.strokeStyle = "white";
-        starCtx.lineWidth = 2;
-        starCtx.stroke();
-        if (s.life > s.maxLife) shootingStars.splice(i, 1);
-      }
-
-      if (Math.random() < 0.04) {
-        shootingStars.push({
-          x: Math.random() * starCanvas.width,
-          y: Math.random() * starCanvas.height * 0.5,
-          length: Math.random() * 80 + 100,
-          speed: Math.random() * 8 + 10,
-          life: 0,
-          maxLife: 30 + Math.random() * 10
-        });
-      }
-
-      requestAnimationFrame(drawStars);
-    }
-
-    window.addEventListener("resize", () => {
-      resizeStarCanvas();
-      createStars();
-    });
-
-    resizeStarCanvas();
-    createStars();
-    drawStars();
-  </script>
 
 </body>
 </html>
