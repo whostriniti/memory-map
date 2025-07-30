@@ -367,6 +367,21 @@
   cursor: pointer;
 }
 
+    .sparkle-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.modal-content {
+  position: relative;
+  z-index: 2;
+}
+
+
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.9); }
   to   { opacity: 1; transform: scale(1); }
@@ -443,6 +458,20 @@
   }
 }
 
+     .sparkle-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .modal-content {
+      position: relative;
+      z-index: 2;
+    }
+
 
   </style>
 </head>
@@ -460,11 +489,11 @@
 <!-- Background Emojis and Images -->
 <div class="floating-bg">
   
-  <img src="images/roblox.png" class="bg-image" style="top: 26%; left: 9%;" alt="Roblox" />
+  <img src="images/sc1.png" class="bg-image" style="top: 26%; left: 9%;" alt="Snapchat 1" />
   
   <img src="images/dlus4.png" class="bg-image" style="top: 61%; left: 65%;" alt="Us 4" />
   
-  <img src="images/sc1.png" class="bg-image" style="top: 60%; left: 15%;" alt="Snapchat 1" />
+  <img src="images/roblox.png" class="bg-image" style="top: 60%; left: 15%;" alt="Roblox" />
   
   <img src="images/sc2.png" class="bg-image" style="top: 44%; left: 70%;" alt="Snapchat 2" />
   
@@ -550,7 +579,63 @@
 
  document.addEventListener("DOMContentLoaded", () => {
   spawnEmojis();
-  document.getElementById("revealBtn").addEventListener("click", showModal);
+   document.getElementById("revealBtn").addEventListener("click", showModal);
+
+  // Sparkle setup
+  const canvas = document.getElementById("sparkleCanvas");
+  const ctx = canvas.getContext("2d");
+  let sparkles = [];
+
+  function resizeSparkleCanvas() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+
+  function createSparkle() {
+    return {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 1.5 + 0.5,
+      opacity: Math.random() * 0.5 + 0.5,
+      speedY: Math.random() * 0.5 + 0.2,
+      life: 0,
+      maxLife: 80 + Math.random() * 20
+    };
+  }
+
+  function drawSparkles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    sparkles.forEach((s, i) => {
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${s.opacity})`;
+      ctx.fill();
+      s.y -= s.speedY;
+      s.life++;
+      if (s.life > s.maxLife) sparkles[i] = createSparkle();
+    });
+    requestAnimationFrame(drawSparkles);
+  }
+
+  function startSparkles() {
+    resizeSparkleCanvas();
+    sparkles = Array.from({ length: 50 }, createSparkle);
+    drawSparkles();
+  }
+
+  // Hook into modal open
+  window.openLoveLetter = function () {
+    const modal = document.getElementById("loveLetterModal");
+    modal.style.display = "flex";
+    setTimeout(startSparkles, 50);
+  };
+
+  window.closeLoveLetter = function () {
+    document.getElementById("loveLetterModal").style.display = "none";
+  };
+
+  window.addEventListener("resize", resizeSparkleCanvas);
+});
 });
 
 function closeModal() {
@@ -562,22 +647,23 @@ function closeModal() {
  
 </script>
 
-  <script>
-  const canvas = document.getElementById("starCanvas");
-  const ctx = canvas.getContext("2d");
-  let stars = [];
+<script>
+  // ==================== STARS & SHOOTING STARS ====================
+  const starCanvas = document.getElementById("starCanvas");
+  const starCtx = starCanvas.getContext("2d");
+  let stars = [], shootingStars = [];
 
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+  function resizeStarCanvas() {
+    starCanvas.width = window.innerWidth;
+    starCanvas.height = window.innerHeight;
   }
 
   function createStars() {
     stars = [];
     for (let i = 0; i < 100; i++) {
       stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
+        x: Math.random() * starCanvas.width,
+        y: Math.random() * starCanvas.height,
         radius: Math.random() * 1.5 + 0.5,
         alpha: 1 + Math.random() * 0.75,
         delta: Math.random() * 0.02 + 0.005,
@@ -586,99 +672,145 @@ function closeModal() {
   }
 
   function drawStars() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    starCtx.clearRect(0, 0, starCanvas.width, starCanvas.height);
     for (let star of stars) {
-      ctx.beginPath();
-      ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
-      ctx.fill();
       star.alpha += star.delta;
-      if (star.alpha <= 0 || star.alpha >= 1) {
-        star.delta *= -1;
-      }
+      if (star.alpha <= 0 || star.alpha >= 1) star.delta *= -1;
+
+      starCtx.beginPath();
+      starCtx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+      starCtx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+      starCtx.fill();
     }
+
+    // Shooting stars
+    for (let i = shootingStars.length - 1; i >= 0; i--) {
+      const s = shootingStars[i];
+      s.x += s.speed;
+      s.y += s.speed;
+      s.life++;
+
+      starCtx.beginPath();
+      starCtx.moveTo(s.x, s.y);
+      starCtx.lineTo(s.x - s.length, s.y - s.length);
+      starCtx.strokeStyle = "white";
+      starCtx.lineWidth = 2;
+      starCtx.stroke();
+
+      if (s.life > s.maxLife) shootingStars.splice(i, 1);
+    }
+
+    if (Math.random() < 0.04) createShootingStar();
     requestAnimationFrame(drawStars);
   }
 
+  function createShootingStar() {
+    shootingStars.push({
+      x: Math.random() * starCanvas.width,
+      y: Math.random() * starCanvas.height * 0.5,
+      length: Math.random() * 80 + 100,
+      speed: Math.random() * 8 + 10,
+      life: 0,
+      maxLife: 30 + Math.random() * 10
+    });
+  }
+
   window.addEventListener("resize", () => {
-    resizeCanvas();
+    resizeStarCanvas();
     createStars();
   });
 
-  resizeCanvas();
+  resizeStarCanvas();
   createStars();
   drawStars();
-    // Shooting stars logic
-const shootingStars = [];
 
-function createShootingStar() {
-  const startX = Math.random() * canvas.width;
-  const startY = Math.random() * canvas.height * 0.5; // top half of screen
-  const length = Math.random() * 80 + 100;
-  const speed = Math.random() * 8 + 10;
 
-  shootingStars.push({
-    x: startX,
-    y: startY,
-    length: length,
-    speed: speed,
-    life: 0,
-    maxLife: 30 + Math.random() * 10
-  });
-}
+  // ==================== EMOJIS ====================
+  const emojis = ["😼", "🙀", "💍", "💞", "🌝", "😍", "😭", "😔", "🖤", "😡", "🎮", "🤍", "😁", "😘", "💖", "😜", "💞", "😩", "🤣", "💝", "🤩", "🥺", "👿", "💘", "🤟", "🤰", "🧡", "💉", "💎", "💫", "💻", "🚀", "🚗", "💕", "🐎", "🏍️"];
 
-// Modify animate function to include shooting stars
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  // Stars
-  for (let star of stars) {
-    star.alpha += star.delta;
-    if (star.alpha <= 0 || star.alpha >= 1) star.delta *= -1;
-
-    ctx.beginPath();
-    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
-    ctx.fill();
-  }
-
-  // Shooting Stars
-  for (let i = shootingStars.length - 1; i >= 0; i--) {
-    const s = shootingStars[i];
-    s.x += s.speed;
-    s.y += s.speed;
-    s.life++;
-
-    ctx.beginPath();
-    ctx.moveTo(s.x, s.y);
-    ctx.lineTo(s.x - s.length, s.y - s.length);
-    ctx.strokeStyle = "white";
-    ctx.lineWidth = 2;
-    ctx.stroke();
-
-    if (s.life > s.maxLife) {
-      shootingStars.splice(i, 1); // remove it
+  function spawnEmojis() {
+    document.querySelectorAll('.floating-emoji').forEach(e => e.remove());
+    for (let i = 0; i < 25; i++) {
+      const emoji = document.createElement("div");
+      emoji.className = "floating-emoji";
+      emoji.style.left = (5 + Math.random() * 90) + "vw";
+      emoji.style.animationDuration = (6 + Math.random() * 3) + "s";
+      emoji.style.top = "100vh";
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      document.body.appendChild(emoji);
     }
   }
 
-  // Occasionally launch a new shooting star
-  if (Math.random() < 0.04) {
-    createShootingStar();
+  function closeModal() {
+    document.getElementById('ringModal').style.display = 'none';
+    document.getElementById('ringRevealFinal').style.display = 'block';
+    spawnEmojis();
   }
 
-  requestAnimationFrame(animate);
-}
-    animate();
-function openLoveLetter() {
-  document.getElementById("loveLetterModal").style.display = "flex";
-}
+  document.addEventListener("DOMContentLoaded", () => {
+    spawnEmojis();
+    document.getElementById("revealBtn").addEventListener("click", () => {
+      document.getElementById("ringModal").style.display = 'flex';
+    });
+  });
 
-function closeLoveLetter() {
-  document.getElementById("loveLetterModal").style.display = "none";
-}
+  // ==================== SPARKLES ====================
+  const sparkleCanvas = document.getElementById("sparkleCanvas");
+  const sparkleCtx = sparkleCanvas.getContext("2d");
+  let sparkles = [];
 
+  function resizeSparkleCanvas() {
+    sparkleCanvas.width = sparkleCanvas.offsetWidth;
+    sparkleCanvas.height = sparkleCanvas.offsetHeight;
+  }
+
+  function createSparkle() {
+    return {
+      x: Math.random() * sparkleCanvas.width,
+      y: Math.random() * sparkleCanvas.height,
+      radius: Math.random() * 1.5 + 0.5,
+      opacity: Math.random() * 0.5 + 0.5,
+      speedY: Math.random() * 0.5 + 0.2,
+      life: 0,
+      maxLife: 80 + Math.random() * 20
+    };
+  }
+
+  function drawSparkles() {
+    sparkleCtx.clearRect(0, 0, sparkleCanvas.width, sparkleCanvas.height);
+    sparkles.forEach((s, i) => {
+      sparkleCtx.beginPath();
+      sparkleCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+      sparkleCtx.fillStyle = `rgba(255, 255, 255, ${s.opacity})`;
+      sparkleCtx.fill();
+      s.y -= s.speedY;
+      s.life++;
+      if (s.life > s.maxLife) sparkles[i] = createSparkle();
+    });
+    requestAnimationFrame(drawSparkles);
+  }
+
+  function startSparkles() {
+    resizeSparkleCanvas();
+    sparkles = Array.from({ length: 50 }, createSparkle);
+    drawSparkles();
+  }
+
+  function openLoveLetter() {
+    const modal = document.getElementById("loveLetterModal");
+    modal.style.display = "flex";
+    setTimeout(startSparkles, 50);
+  }
+
+  function closeLoveLetter() {
+    document.getElementById("loveLetterModal").style.display = "none";
+  }
+
+  window.addEventListener("resize", resizeSparkleCanvas);
 </script>
+
 <div id="loveLetterModal" class="modal" onclick="closeLoveLetter()">
+    <canvas id="sparkleCanvas" class="sparkle-canvas"></canvas>
   <div class="modal-content" onclick="event.stopPropagation()">
     <h2>💌 To My Triniti</h2>
     <p>
@@ -692,7 +824,6 @@ function closeLoveLetter() {
     </p>
   </div>
 </div>
-
 
 
 </body>
