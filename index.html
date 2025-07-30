@@ -510,22 +510,23 @@
       document.getElementById('ringModal').style.display = 'none';
       document.getElementById('ringRevealFinal').style.display = 'block';
       spawnEmojis();
-      let count = 0;
-const interval = setInterval(() => {
-  confetti({
-    particleCount: 100,
-    spread: 60,
-    origin: { y: 0.6 }
-  });
-  count++;
-  if (count === 3) clearInterval(interval);
-}, 400);
     }
 
     document.addEventListener("DOMContentLoaded", () => {
       spawnEmojis();
       document.getElementById("revealBtn").addEventListener("click", () => {
         document.getElementById("ringModal").style.display = 'flex';
+
+         let count = 0;
+  const interval = setInterval(() => {
+    confetti({
+      particleCount: 100,
+      spread: 60,
+      origin: { y: 0.6 }
+    });
+    count++;
+    if (count === 3) clearInterval(interval);
+  }, 400);
       });
     });
 
