@@ -440,7 +440,7 @@
   </div>
 
   <header>
-    <h1>🌌 The Story of Us 😼💍</h1>
+    <h1>🌌 The Story of Us ✨</h1>
     <p>From Roblox to Rings and Ridiculous Laughs</p>
   </header>
 
@@ -543,8 +543,8 @@
       return {
         x: Math.random() * sparkleCanvas.width,
         y: Math.random() * sparkleCanvas.height,
-        radius: Math.random() * 1.5 + 0.5,
-        opacity: Math.random() * 0.5 + 0.5,
+       radius: Math.random() * 3 + 2,        
+        opacity: Math.random() * 0.4 + 0.6,
         speedY: Math.random() * 0.5 + 0.2,
         life: 0,
          hue: Math.floor(Math.random() * 360), 
@@ -560,9 +560,11 @@
 
     sparkleCtx.beginPath();
     sparkleCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-    sparkleCtx.fillStyle = `hsla(${s.hue}, 100%, 70%, ${s.opacity})`; // Bright rainbow
+    sparkleCtx.shadowBlur = 10;
+    sparkleCtx.shadowColor = `hsla(${s.hue}, 100%, 85%, ${s.opacity})`;
+    sparkleCtx.fillStyle = `hsla(${s.hue}, 100%, 85%, ${s.opacity})`; // Bright rainbow
     sparkleCtx.fill();
-
+    sparkleCtx.shadowBlur = 0;
     s.y -= s.speedY;
     s.life++;
     if (s.life > s.maxLife) sparkles[i] = createSparkle();
