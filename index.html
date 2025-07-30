@@ -537,6 +537,7 @@
         speedY: Math.random() * 0.5 + 0.2,
         life: 0,
         maxLife: 80 + Math.random() * 20
+         hue: Math.floor(Math.random() * 360)
       };
     }
 
@@ -546,8 +547,7 @@
       sparkles.forEach((s, i) => {
         sparkleCtx.beginPath();
         sparkleCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-        const pastelHue = Math.floor(Math.random() * 360);
-        sparkleCtx.fillStyle = `hsla(${pastelHue}, 100%, 85%, ${s.opacity})`;
+       sparkleCtx.fillStyle = `hsla(${s.hue}, 100%, 85%, ${s.opacity})`;
         sparkleCtx.fill();
         s.y -= s.speedY;
         s.life++;
