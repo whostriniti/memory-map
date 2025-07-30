@@ -547,23 +547,27 @@
         opacity: Math.random() * 0.5 + 0.5,
         speedY: Math.random() * 0.5 + 0.2,
         life: 0,
+         hue: Math.floor(Math.random() * 360), 
         maxLife: 80 + Math.random() * 20
       };
     }
 
     function drawSparkles() {
       if (!sparkleCtx) return;
-      sparkleCtx.clearRect(0, 0, sparkleCanvas.width, sparkleCanvas.height);
-      sparkles.forEach((s, i) => {
-        sparkleCtx.beginPath();
-        sparkleCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-        sparkleCtx.fillStyle = `rgba(255, 255, 255, ${s.opacity})`;
-        sparkleCtx.fill();
-        s.y -= s.speedY;
-        s.life++;
-        if (s.life > s.maxLife) sparkles[i] = createSparkle();
-      });
-      requestAnimationFrame(drawSparkles);
+  sparkleCtx.clearRect(0, 0, sparkleCanvas.width, sparkleCanvas.height);
+  sparkles.forEach((s, i) => {
+    s.hue = (s.hue + 1) % 360; // Slowly shift the hue
+
+    sparkleCtx.beginPath();
+    sparkleCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+    sparkleCtx.fillStyle = `hsla(${s.hue}, 100%, 70%, ${s.opacity})`; // Bright rainbow
+    sparkleCtx.fill();
+
+    s.y -= s.speedY;
+    s.life++;
+    if (s.life > s.maxLife) sparkles[i] = createSparkle();
+  });
+  requestAnimationFrame(drawSparkles);
     }
 
     function startSparkles() {
