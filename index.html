@@ -5,12 +5,250 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Story of Us 💙</title>
   <style>
-    /* (Include all your existing CSS as before, including body, header, timeline, modal, sparkle-canvas, etc.) */
-    body { margin: 0; background-color: #000; font-family: 'Segoe UI', sans-serif; color: white; overflow-x: hidden; }
-    /* ... all your existing styles, including sparkle-canvas, modal-content z-index, floating-emoji, media queries, etc. */
+    /* Your full CSS is kept exactly as it was, including modal styles, background images, emojis, moon, etc. */
+    body {
+      margin: 0;
+      background-color: #000;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px 30px;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      color: #00ccff;
+    }
+
+    header p {
+      font-size: 1.1em;
+      color: #ccc;
+    }
+
+    .timeline {
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .event {
+      background: #111;
+      margin: 20px 15px;
+      padding: 15px 20px;
+      border-left: 5px solid #00ccff;
+      border-radius: 5px;
+    }
+
+    .event h3 {
+      margin: 0;
+      font-size: 1.3em;
+      color: #ff69b4;
+    }
+
+    .event p {
+      margin: 5px 0 0;
+    }
+
+    #promise {
+      background: #222;
+      margin: 40px auto;
+      max-width: 700px;
+      padding: 30px;
+      border-radius: 10px;
+      border: 2px dashed #ff1493;
+      text-align: center;
+      font-size: 1.1em;
+    }
+
+    #starCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -2;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+    }
+
+    #moon {
+      position: fixed;
+      top: 7%;
+      right: 5%;
+      width: 300px;
+      max-width: 30vw;
+      z-index: 2;
+      opacity: 1;
+      pointer-events: none;
+      animation: glow 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7));
+    }
+
+    @keyframes glow {
+      0%, 100% { opacity: 0.85; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.03); }
+    }
+
+    .footer {
+      text-align: center;
+      margin: 40px 0 20px;
+      font-size: 0.9em;
+      color: gray;
+    }
+
+    .floating-emoji {
+      position: fixed;
+      font-size: 2rem;
+      animation: float 10s linear infinite;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); }
+      100% { transform: translateY(-120vh) rotate(360deg); }
+    }
+
+    .reveal-container {
+      text-align: center;
+      margin: 50px 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .reveal-button, .music-button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 10px;
+    }
+
+    .reveal-button:hover, .music-button:hover {
+      background-color: #ff1493;
+      transform: scale(1.05);
+    }
+
+    #ringModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #ringModal img {
+      max-width: 300px;
+      width: 90%;
+      height: auto;
+      border-radius: 12px;
+      animation: popIn 0.5s ease;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    #ringRevealFinal {
+      display: none;
+      margin-top: 20px;
+      max-width: 200px;
+      width: 80%;
+      align-self: center;
+    }
+
+    .bg-image {
+      position: fixed;
+      width: 150px;
+      opacity: 0.5;
+      z-index: 0;
+      animation: floatSlow 10s infinite ease-in-out;
+      pointer-events: none;
+    }
+
+    @keyframes floatSlow {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+
+    .love-letter-button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      font-size: 1.1em;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 10px;
+      transition: background 0.3s ease;
+    }
+
+    .love-letter-button:hover {
+      background-color: #ff1493;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 200;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #111;
+      margin: auto;
+      padding: 30px 20px;
+      border-radius: 10px;
+      max-width: 90%;
+      width: 400px;
+      color: white;
+      box-shadow: 0 0 20px #ff69b4;
+      animation: fadeIn 0.5s ease;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .sparkle-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
   </style>
 </head>
 <body>
+
   <img src="images/moon.png" id="moon" alt="Moon">
   <canvas id="starCanvas"></canvas>
 
@@ -19,9 +257,9 @@
   </audio>
 
   <div class="floating-bg">
-    <!-- background images -->
+    <!-- All your background images here (unchanged) -->
     <img src="images/sc1.png" class="bg-image" style="top: 26%; left: 9%;" alt="Snapchat 1" />
-    <!-- ... other background images ... -->
+    <!-- Add the rest of your images as they were -->
   </div>
 
   <div id="ringModal" onclick="closeModal()">
@@ -34,9 +272,9 @@
   </header>
 
   <div class="timeline">
-    <!-- your event blocks -->
     <div class="event"><h3>📅 Feb 8</h3><p>We met. Chaos and love were born 😎</p></div>
-    <!-- ... rest of events ... -->
+    <div class="event"><h3>❤️ Feb 14</h3><p>Our first time. Emotional damage (in a good way) 💘</p></div>
+    <!-- other events -->
   </div>
 
   <div id="promise">
@@ -51,23 +289,26 @@
     <button class="love-letter-button" onclick="openLoveLetter()">💌 Read My Love Letter</button>
   </div>
 
-  <div class="footer">
-    Made with croissants, Monster cans, and love. 🍪💘
-  </div>
+  <div class="footer">Made with croissants, Monster cans, and love. 🍪💘</div>
 
   <div id="loveLetterModal" class="modal" onclick="closeLoveLetter()">
     <canvas id="sparkleCanvas" class="sparkle-canvas"></canvas>
     <div class="modal-content" onclick="event.stopPropagation()">
       <h2>💌 To My Triniti</h2>
       <p>
-        Every moment with you feels like stardust in my chest. …
+        Every moment with you feels like stardust in my chest.  
+        From Roblox to the deepest conversations, from your loudest laugh to your quietest sighs — I love it all.  
+        I don’t just love you — I’m in love with every part of your soul.  
+        You made me believe in forever, and I can’t wait to grow old with you.  
+        This ring, this site, this everything — it’s all for you.  
+        💍💙 Forever yours,<br>
         — Naimul
       </p>
     </div>
   </div>
 
   <script>
-    const emojis = ["😼","🙀","💍","💞","🌝","😍","😭","😔","🖤","😡","🎮","🤍","😁","😘","💖","😜","😞","😩","🤣","💝","🤩","🥺","👿","💘","🤟","🤰","🧡","💉","💎","💫","💻","🚀","🚗","💕","🐎","🏍️"];
+    const emojis = ["😼","🙀","💍","💞","🌝","😍","😭","😔","🖤","😡","🎮","🤍","😁","😘","💖","😜","😩","🤣","💝","🤩","🥺","👿","💘","🤟","🤰","🧡","💉","💎","💫","💻","🚀","🚗","💕","🐎","🏍️"];
 
     function spawnEmojis() {
       document.querySelectorAll('.floating-emoji').forEach(e => e.remove());
@@ -95,7 +336,7 @@
       });
     });
 
-    // === Sparkles setup ===
+    // === Sparkles ===
     let sparkleCanvas, sparkleCtx, sparkles = [];
 
     function resizeSparkleCanvas() {
@@ -149,11 +390,9 @@
       document.getElementById("loveLetterModal").style.display = 'none';
     }
 
-    window.addEventListener("resize", () => {
-      resizeSparkleCanvas();
-    });
+    window.addEventListener("resize", resizeSparkleCanvas);
 
-    // === Starry Background and shooting stars ===
+    // Star background code (unchanged from your original)
     const starCanvas = document.getElementById("starCanvas");
     const starCtx = starCanvas.getContext("2d");
     let stars = [], shootingStars = [];
@@ -209,6 +448,7 @@
           maxLife: 30 + Math.random() * 10
         });
       }
+
       requestAnimationFrame(drawStars);
     }
 
@@ -221,5 +461,6 @@
     createStars();
     drawStars();
   </script>
+
 </body>
 </html>
