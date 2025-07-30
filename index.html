@@ -1,803 +1,225 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>The Story of Us 💙</title>
-<style>
-    body {
-      margin: 0;
-      background-color: #000;
-      font-family: 'Segoe UI', sans-serif;
-      color: white;
-      overflow-x: hidden;
-    }
-
-    header {
-      text-align: center;
-      padding: 50px 20px 30px;
-    }
-
-    header h1 {
-      font-size: 2.5em;
-      color: #00ccff;
-    }
-
-    header p {
-      font-size: 1.1em;
-      color: #ccc;
-    }
-
-    .timeline {
-      max-width: 700px;
-      margin: auto;
-      padding: 20px;
-    }
-
-    .event {
-      background: #111;
-      margin: 20px 15px;
-      padding: 15px 20px;
-      border-left: 5px solid #00ccff;
-      border-radius: 5px;
-    }
-
-    .event h3 {
-      margin: 0;
-      font-size: 1.3em;
-      color: #ff69b4;
-    }
-
-    .event p {
-      margin: 5px 0 0;
-    }
-
-    #promise {
-      background: #222;
-      margin: 40px auto;
-      max-width: 700px;
-      padding: 30px;
-      border-radius: 10px;
-      border: 2px dashed #ff1493;
-      text-align: center;
-      font-size: 1.1em;
-    }
-    #starCanvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -2;
-  width: 100vw;
-  height: 100vh;
-  background: black;
-}
-    #moon {
-  position: fixed;
-  top: 7%;
-  right: 5%;
-  width: 300px;
-  max-width: 30vw;
-  z-index: 2;
-  opacity: 1;
-  pointer-events: none;
-  animation: glow 4s ease-in-out infinite;
-  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7));
-}
-
-    @media (max-width: 600px) {
-  #moon {
-    width: 90px;           
-    top: -1%;
-    right: 0%;
-  }
-}
-
-@keyframes glow {
-  0%, 100% { opacity: 0.85; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.03); }
-}
-
-
-
-    .footer {
-      text-align: center;
-      margin: 40px 0 20px;
-      font-size: 0.9em;
-      color: gray;
-    }
-
-    .floating-emoji {
-      position: fixed;
-      font-size: 2rem;
-      animation: float 10s linear infinite;
-      pointer-events: none;
-      z-index: 10;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(100vh) rotate(0deg); }
-      100% { transform: translateY(-120vh) rotate(360deg); }
-    }
-
-    .reveal-container {
-      text-align: center;
-      margin: 50px 15px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .reveal-button, .music-button {
-      background-color: #ff69b4;
-      color: white;
-      border: none;
-      padding: 15px 25px;
-      font-size: 1.2em;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin: 10px;
-    }
-
-    .reveal-button:hover, .music-button:hover {
-      background-color: #ff1493;
-      transform: scale(1.05);
-    }
-
-    #ringModal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0, 0, 0, 0.9);
-      z-index: 100;
-      justify-content: center;
-      align-items: center;
-    }
-
-    #ringModal img {
-      max-width: 300px;
-      width: 90%;
-      height: auto;
-      border-radius: 12px;
-      animation: popIn 0.5s ease;
-    }
-
-    @keyframes popIn {
-      0% { transform: scale(0.5); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    #ringRevealFinal {
-      display: none;
-      margin-top: 20px;
-      max-width: 200px;
-      width: 80%;
-      align-self: center;
-    }
-
-    .bg-image {
-  position: fixed;
-  width: 150px;             
-  opacity: 0.5;           
-  z-index: 0;
-  animation: floatSlow 10s infinite ease-in-out;
-  pointer-events: none;
-}
-    @keyframes floatSlow {
-      0% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(5deg); }
-      100% { transform: translateY(0px) rotate(0deg); }
-    }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2em;
-      }
-      .event h3 {
-        font-size: 1.1em;
-      }
-      .reveal-button, .music-button {
-        font-size: 1em;
-        padding: 12px 20px;
-      }
-    }
-
-     @media (max-width: 600px) {
-    .bg-image {
-      width: 100px;      
-      opacity: 0.5;
-    }
-  }
-
-    /* Tablet view: width ≤ 768px */
-@media (max-width: 768px) {
-  .timeline, #promise {
-    padding: 15px;
-    margin: 20px 10px;
-  }
-
-  .event {
-    margin: 15px 10px;
-    padding: 12px 15px;
-  }
-
-  header {
-    padding: 40px 10px 20px;
-  }
-
-  header h1 {
-    font-size: 1.8em;
-  }
-
-  header p {
-    font-size: 1em;
-  }
-
-  .reveal-container {
-    margin: 30px 10px;
-  }
-
-  .reveal-button, .music-button {
-    font-size: 1em;
-    padding: 12px 18px;
-  }
-
-  #ringModal img {
-    max-width: 250px;
-    width: 85%;
-  }
-
-  #ringRevealFinal {
-    max-width: 180px;
-    width: 70%;
-  }
-
-  #moon {
-    width: 80px;
-    top: 2%;
-    right: 3%;
-  }
-
-  .bg-image {
-    width: 70px !important;
-    max-width: 15vw;
-  }
-
-  .floating-emoji {
-    font-size: 1.5rem;
-  }
-}
-
-/* Mobile view: width ≤ 480px */
-@media (max-width: 480px) {
-  header h1 {
-    font-size: 1.6em;
-  }
-
-  .event h3 {
-    font-size: 1em;
-  }
-
-  #ringModal img {
-    max-width: 200px;
-    width: 90%;
-  }
-
-  #moon {
-    width: 65px;
-    top: 0%;
-    right: 2%;
-  }
-
-  .bg-image {
-    width: 100px !important;
-    max-width: 25vw;
-    top: auto
-    left: auto
-  }
-
-  .floating-emoji {
-    font-size: 1.3rem;
-  }
-}
-.love-letter-button {
-  background-color: #ff69b4;
-  color: white;
-  border: none;
-  padding: 14px 24px;
-  font-size: 1.1em;
-  border-radius: 10px;
-  cursor: pointer;
-  margin: 10px;
-  transition: background 0.3s ease;
-}
-
-.love-letter-button:hover {
-  background-color: #ff1493;
-}
-
-/* Modal Styles */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 200;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.85);
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background-color: #111;
-  margin: auto;
-  padding: 30px 20px;
-  border-radius: 10px;
-  max-width: 90%;
-  width: 400px;
-  color: white;
-  box-shadow: 0 0 20px #ff69b4;
-  animation: fadeIn 0.5s ease;
-  text-align: center;
-}
-
-.modal-content h2 {
-  color: #ff69b4;
-  margin-bottom: 15px;
-}
-
-.modal-content p {
-  font-size: 1em;
-  line-height: 1.6;
-  white-space: pre-line;
-}
-
-.close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 2rem;
-  color: white;
-  cursor: pointer;
-}
-
-    .sparkle-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-.modal-content {
-  position: relative;
-  z-index: 2;
-}
-
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-    @media (max-width: 768px) {
-  .modal-content {
-    width: 85%;
-    padding: 25px 20px;
-    font-size: 1em;
-    line-height: 1.6em;
-  }
-
-  .modal-content h2 {
-    font-size: 1.3em;
-    margin-bottom: 15px;
-  }
-
-  .modal-content p {
-    font-size: 1em;
-  }
-}
-
-@media (max-width: 480px) {
-  .modal-content {
-    width: 90%;
-    padding: 20px 15px;
-    font-size: 0.95em;
-    line-height: 1.55em;
-  }
-
-  .modal-content h2 {
-    font-size: 1.15em;
-    margin-bottom: 12px;
-  }
-
-  .modal-content p {
-    font-size: 0.9em;
-  }
-}
-@media (max-width: 768px) {
-  .modal-content {
-    width: 85%;
-    padding: 25px 20px;
-    font-size: 1em;
-    line-height: 1.6em;
-  }
-
-  .modal-content h2 {
-    font-size: 1.3em;
-    margin-bottom: 15px;
-  }
-
-  .modal-content p {
-    font-size: 1em;
-  }
-}
-
-@media (max-width: 480px) {
-  .modal-content {
-    width: 90%;
-    padding: 20px 15px;
-    font-size: 0.95em;
-    line-height: 1.55em;
-  }
-
-  .modal-content h2 {
-    font-size: 1.15em;
-    margin-bottom: 12px;
-  }
-
-  .modal-content p {
-    font-size: 0.9em;
-  }
-}
-
-     .sparkle-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-    .modal-content {
-      position: relative;
-      z-index: 2;
-    }
-
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Story of Us 💙</title>
+  <style>
+    /* (Include all your existing CSS as before, including body, header, timeline, modal, sparkle-canvas, etc.) */
+    body { margin: 0; background-color: #000; font-family: 'Segoe UI', sans-serif; color: white; overflow-x: hidden; }
+    /* ... all your existing styles, including sparkle-canvas, modal-content z-index, floating-emoji, media queries, etc. */
   </style>
 </head>
 <body>
-<img alt="Moon" id="moon" src="images/moon.png"/>
-<canvas id="starCanvas"></canvas>
-<!-- Music -->
-<audio id="bg-music" loop="">
-<source src="ylimd8bit.mp3" type="audio/mpeg"/>
-</audio>
-<!-- Background Emojis and Images -->
-<div class="floating-bg">
-<img alt="Snapchat 1" class="bg-image" src="images/sc1.png" style="top: 26%; left: 9%;">
-<img alt="Us 4" class="bg-image" src="images/dlus4.png" style="top: 61%; left: 65%;"/>
-<img alt="Roblox" class="bg-image" src="images/roblox.png" style="top: 60%; left: 15%;"/>
-<img alt="Snapchat 2" class="bg-image" src="images/sc2.png" style="top: 44%; left: 70%;"/>
-<img alt="Us 1" class="bg-image" src="images/us1.png" style="top: 27%; left: 27%;"/>
-<img alt="Finn" class="bg-image" src="images/finn.png" style="top: 60%; left: 40%;"/>
-<img alt="Snapchat 3" class="bg-image" src="images/sc3.png" style="top: 27%; left: 45%;"/>
-<img alt="Us 5" class="bg-image" src="images/us5.png" style="top: 44%; left: 42%;"/>
-<img alt="Us 2" class="bg-image" src="images/us2.png" style="top: 27%; left: 70%;"/>
-<img alt="Kiki" class="bg-image" src="images/kiki.png" style="top: 42%; left: 17%;"/>
-<img alt="Fortnite" class="bg-image" src="images/fortnite.png" style="top: 81%; left: 40%;"/>
-<img alt="Maxx" class="bg-image" src="images/maxx.png" style="top: 81%; left: 15%;"/>
-<img alt="Snapchat 4" class="bg-image" src="images/sc4.png" style="top: 81%; left: 65%;"/>
-</img></div>
-<!-- Ring Modal -->
-<div id="ringModal" onclick="closeModal()">
-<img alt="Promise Ring" src="images/ring.png"/>
-</div>
-<header>
-<h1>🌌 The Story of Us 😼💍</h1>
-<p>From Roblox to Rings and Ridiculous Laughs</p>
-</header>
-<div class="timeline">
-<div class="event"><h3>📅 Feb 8</h3><p>We met. Chaos and love were born 😎</p></div>
-<div class="event"><h3>❤️ Feb 14</h3><p>Our first time. Emotional damage (in a good way) 💘</p></div>
-<div class="event"><h3>🫶 Mar 7</h3><p>We made it official 💏</p></div>
-<div class="event"><h3>💬 Mar 30 @ 1:05AM</h3><p>Our first “I love yous” 🥺</p></div>
-<div class="event"><h3>👶 July 7</h3><p>You trusted me with the deepest part of you 😔</p></div>
-<div class="event"><h3>🦎 June 26</h3><p>Kiki’s birthday — royalty with claws 🙀</p></div>
-<div class="event"><h3>🐱 Aug 16</h3><p>Finn was born. And instantly spoiled 😼</p></div>
-</div>
-<div id="promise">
-<h2>💍 My Promise</h2>
-<p>
-    This isn’t just a ring. It’s the moment I said: “You're it for me.”  
-    Through Roblox, loud car rides, Monster cans, and your chaotic emojis, I’m here.  
-    Always. 🙏😭🌝💖
-  </p>
-</div>
-<div class="reveal-container">
-<button class="music-button" onclick="document.getElementById('bg-music').play()">▶️ Play Our Song</button>
-<button class="reveal-button" id="revealBtn">💖 Click to Reveal Your Ring 💖</button>
-<img alt="Promise Ring Final Position" id="ringRevealFinal" src="images/ring.png"/>
-<button class="love-letter-button" onclick="openLoveLetter()">💌 Read My Love Letter</button>
-</div>
-<div class="footer">
-  Made with croissants, Monster cans, and love. 🍪💘
-</div>
-<!-- JavaScript -->
-<script>
-  const emojis = ["😼", "🙀", "💍", "💞", "🌝", "😍", "😭", "😔", "🖤", "😡", "🎮", "🤍", "😁", "😘", "💖", "😜", "💞", "😩", "🤣", "💝", "🤩", "🥺", "👿", "💘", "🤟", "🤰", "🧡", "💉", "💎", "💫", "💻", "🚀", "🚗", "💕", "🐎", "🏍️", ];
-  function spawnEmojis() {
-    document.querySelectorAll('.floating-emoji').forEach(e => e.remove()); // Remove old emojis
+  <img src="images/moon.png" id="moon" alt="Moon">
+  <canvas id="starCanvas"></canvas>
 
-  for (let i = 0; i < 25; i++) {
-    const emoji = document.createElement("div");
-    emoji.className = "floating-emoji";
-    emoji.style.left = (5 + Math.random() * 90) + "vw"; // keep some margin
-    emoji.style.animationDuration = (6 + Math.random() * 3) + "s";
-    emoji.style.top = "100vh"; // Start from bottom
-    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-    document.body.appendChild(emoji);
+  <audio id="bg-music" loop>
+    <source src="ylimd8bit.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div class="floating-bg">
+    <!-- background images -->
+    <img src="images/sc1.png" class="bg-image" style="top: 26%; left: 9%;" alt="Snapchat 1" />
+    <!-- ... other background images ... -->
+  </div>
+
+  <div id="ringModal" onclick="closeModal()">
+    <img src="images/ring.png" alt="Promise Ring">
+  </div>
+
+  <header>
+    <h1>🌌 The Story of Us 😼💍</h1>
+    <p>From Roblox to Rings and Ridiculous Laughs</p>
+  </header>
+
+  <div class="timeline">
+    <!-- your event blocks -->
+    <div class="event"><h3>📅 Feb 8</h3><p>We met. Chaos and love were born 😎</p></div>
+    <!-- ... rest of events ... -->
+  </div>
+
+  <div id="promise">
+    <h2>💍 My Promise</h2>
+    <p>This isn’t just a ring. It’s the moment I said: “You're it for me.” … Always. 🙏😭🌝💖</p>
+  </div>
+
+  <div class="reveal-container">
+    <button class="music-button" onclick="document.getElementById('bg-music').play()">▶️ Play Our Song</button>
+    <button class="reveal-button" id="revealBtn">💖 Click to Reveal Your Ring 💖</button>
+    <img id="ringRevealFinal" src="images/ring.png" alt="Promise Ring Final Position">
+    <button class="love-letter-button" onclick="openLoveLetter()">💌 Read My Love Letter</button>
+  </div>
+
+  <div class="footer">
+    Made with croissants, Monster cans, and love. 🍪💘
+  </div>
+
+  <div id="loveLetterModal" class="modal" onclick="closeLoveLetter()">
+    <canvas id="sparkleCanvas" class="sparkle-canvas"></canvas>
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <h2>💌 To My Triniti</h2>
+      <p>
+        Every moment with you feels like stardust in my chest. …
+        — Naimul
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const emojis = ["😼","🙀","💍","💞","🌝","😍","😭","😔","🖤","😡","🎮","🤍","😁","😘","💖","😜","😞","😩","🤣","💝","🤩","🥺","👿","💘","🤟","🤰","🧡","💉","💎","💫","💻","🚀","🚗","💕","🐎","🏍️"];
+
+    function spawnEmojis() {
+      document.querySelectorAll('.floating-emoji').forEach(e => e.remove());
+      for (let i = 0; i < 25; i++) {
+        const emoji = document.createElement("div");
+        emoji.className = "floating-emoji";
+        emoji.style.left = (5 + Math.random() * 90) + "vw";
+        emoji.style.animationDuration = (6 + Math.random() * 3) + "s";
+        emoji.style.top = "100vh";
+        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        document.body.appendChild(emoji);
+      }
     }
-  }
 
-  function showModal() {
-    document.getElementById('ringModal').style.display = 'flex';
-  }
+    function closeModal() {
+      document.getElementById('ringModal').style.display = 'none';
+      document.getElementById('ringRevealFinal').style.display = 'block';
+      spawnEmojis();
+    }
 
- document.addEventListener("DOMContentLoaded", () => {
-  spawnEmojis();
-   document.getElementById("revealBtn").addEventListener("click", showModal);
-
-  // Sparkle setup
-  const canvas = document.getElementById("sparkleCanvas");
-  const ctx = canvas.getContext("2d");
-  let sparkles = [];
-
-  function resizeSparkleCanvas() {
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-  }
-
-  function createSparkle() {
-    return {
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      radius: Math.random() * 1.5 + 0.5,
-      opacity: Math.random() * 0.5 + 0.5,
-      speedY: Math.random() * 0.5 + 0.2,
-      life: 0,
-      maxLife: 80 + Math.random() * 20
-    };
-  }
-
-  function drawSparkles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    sparkles.forEach((s, i) => {
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 255, 255, ${s.opacity})`;
-      ctx.fill();
-      s.y -= s.speedY;
-      s.life++;
-      if (s.life > s.maxLife) sparkles[i] = createSparkle();
-    });
-    requestAnimationFrame(drawSparkles);
-  }
-
-  function startSparkles() {
-    resizeSparkleCanvas();
-    sparkles = Array.from({ length: 50 }, createSparkle);
-    drawSparkles();
-  }
-
-  // Hook into modal open
-  window.openLoveLetter = function () {
-    const modal = document.getElementById("loveLetterModal");
-    modal.style.display = "flex";
-    setTimeout(startSparkles, 50);
-  };
-
-  window.closeLoveLetter = function () {
-    document.getElementById("loveLetterModal").style.display = "none";
-  };
-
-  window.addEventListener("resize", resizeSparkleCanvas);
-});
-});
-
-function closeModal() {
-  document.getElementById('ringModal').style.display = 'none';
-  document.getElementById('ringRevealFinal').style.display = 'block';
-  spawnEmojis(); // Re-spawn after modal
-}
-
- 
-</script>
-<script>
-  // ==================== STARS & SHOOTING STARS ====================
-  const starCanvas = document.getElementById("starCanvas");
-  const starCtx = starCanvas.getContext("2d");
-  let stars = [], shootingStars = [];
-
-  function resizeStarCanvas() {
-    starCanvas.width = window.innerWidth;
-    starCanvas.height = window.innerHeight;
-  }
-
-  function createStars() {
-    stars = [];
-    for (let i = 0; i < 100; i++) {
-      stars.push({
-        x: Math.random() * starCanvas.width,
-        y: Math.random() * starCanvas.height,
-        radius: Math.random() * 1.5 + 0.5,
-        alpha: 1 + Math.random() * 0.75,
-        delta: Math.random() * 0.02 + 0.005,
+    document.addEventListener("DOMContentLoaded", () => {
+      spawnEmojis();
+      document.getElementById("revealBtn").addEventListener("click", () => {
+        document.getElementById("ringModal").style.display = 'flex';
       });
-    }
-  }
-
-  function drawStars() {
-    starCtx.clearRect(0, 0, starCanvas.width, starCanvas.height);
-    for (let star of stars) {
-      star.alpha += star.delta;
-      if (star.alpha <= 0 || star.alpha >= 1) star.delta *= -1;
-
-      starCtx.beginPath();
-      starCtx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-      starCtx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
-      starCtx.fill();
-    }
-
-    // Shooting stars
-    for (let i = shootingStars.length - 1; i >= 0; i--) {
-      const s = shootingStars[i];
-      s.x += s.speed;
-      s.y += s.speed;
-      s.life++;
-
-      starCtx.beginPath();
-      starCtx.moveTo(s.x, s.y);
-      starCtx.lineTo(s.x - s.length, s.y - s.length);
-      starCtx.strokeStyle = "white";
-      starCtx.lineWidth = 2;
-      starCtx.stroke();
-
-      if (s.life > s.maxLife) shootingStars.splice(i, 1);
-    }
-
-    if (Math.random() < 0.04) createShootingStar();
-    requestAnimationFrame(drawStars);
-  }
-
-  function createShootingStar() {
-    shootingStars.push({
-      x: Math.random() * starCanvas.width,
-      y: Math.random() * starCanvas.height * 0.5,
-      length: Math.random() * 80 + 100,
-      speed: Math.random() * 8 + 10,
-      life: 0,
-      maxLife: 30 + Math.random() * 10
     });
-  }
 
-  window.addEventListener("resize", () => {
+    // === Sparkles setup ===
+    let sparkleCanvas, sparkleCtx, sparkles = [];
+
+    function resizeSparkleCanvas() {
+      if (!sparkleCanvas) return;
+      sparkleCanvas.width = sparkleCanvas.offsetWidth;
+      sparkleCanvas.height = sparkleCanvas.offsetHeight;
+    }
+
+    function createSparkle() {
+      return {
+        x: Math.random() * sparkleCanvas.width,
+        y: Math.random() * sparkleCanvas.height,
+        radius: Math.random() * 1.5 + 0.5,
+        opacity: Math.random() * 0.5 + 0.5,
+        speedY: Math.random() * 0.5 + 0.2,
+        life: 0,
+        maxLife: 80 + Math.random() * 20
+      };
+    }
+
+    function drawSparkles() {
+      if (!sparkleCtx) return;
+      sparkleCtx.clearRect(0, 0, sparkleCanvas.width, sparkleCanvas.height);
+      sparkles.forEach((s, i) => {
+        sparkleCtx.beginPath();
+        sparkleCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        sparkleCtx.fillStyle = `rgba(255, 255, 255, ${s.opacity})`;
+        sparkleCtx.fill();
+        s.y -= s.speedY;
+        s.life++;
+        if (s.life > s.maxLife) sparkles[i] = createSparkle();
+      });
+      requestAnimationFrame(drawSparkles);
+    }
+
+    function startSparkles() {
+      sparkleCanvas = document.getElementById("sparkleCanvas");
+      if (!sparkleCanvas) return;
+      sparkleCtx = sparkleCanvas.getContext("2d");
+      resizeSparkleCanvas();
+      sparkles = Array.from({ length: 50 }, createSparkle);
+      drawSparkles();
+    }
+
+    function openLoveLetter() {
+      document.getElementById("loveLetterModal").style.display = 'flex';
+      setTimeout(startSparkles, 100);
+    }
+
+    function closeLoveLetter() {
+      document.getElementById("loveLetterModal").style.display = 'none';
+    }
+
+    window.addEventListener("resize", () => {
+      resizeSparkleCanvas();
+    });
+
+    // === Starry Background and shooting stars ===
+    const starCanvas = document.getElementById("starCanvas");
+    const starCtx = starCanvas.getContext("2d");
+    let stars = [], shootingStars = [];
+
+    function resizeStarCanvas() {
+      starCanvas.width = window.innerWidth;
+      starCanvas.height = window.innerHeight;
+    }
+
+    function createStars() {
+      stars = [];
+      for (let i = 0; i < 100; i++) {
+        stars.push({
+          x: Math.random() * starCanvas.width,
+          y: Math.random() * starCanvas.height,
+          radius: Math.random() * 1.5 + 0.5,
+          alpha: 1 + Math.random() * 0.75,
+          delta: Math.random() * 0.02 + 0.005,
+        });
+      }
+    }
+
+    function drawStars() {
+      starCtx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+      stars.forEach(star => {
+        star.alpha += star.delta;
+        if (star.alpha <= 0 || star.alpha >= 1) star.delta *= -1;
+        starCtx.beginPath();
+        starCtx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        starCtx.fillStyle = `rgba(255,255,255,${star.alpha})`;
+        starCtx.fill();
+      });
+
+      for (let i = shootingStars.length - 1; i >= 0; i--) {
+        const s = shootingStars[i];
+        s.x += s.speed; s.y += s.speed; s.life++;
+        starCtx.beginPath();
+        starCtx.moveTo(s.x, s.y);
+        starCtx.lineTo(s.x - s.length, s.y - s.length);
+        starCtx.strokeStyle = "white";
+        starCtx.lineWidth = 2;
+        starCtx.stroke();
+        if (s.life > s.maxLife) shootingStars.splice(i, 1);
+      }
+
+      if (Math.random() < 0.04) {
+        shootingStars.push({
+          x: Math.random() * starCanvas.width,
+          y: Math.random() * starCanvas.height * 0.5,
+          length: Math.random() * 80 + 100,
+          speed: Math.random() * 8 + 10,
+          life: 0,
+          maxLife: 30 + Math.random() * 10
+        });
+      }
+      requestAnimationFrame(drawStars);
+    }
+
+    window.addEventListener("resize", () => {
+      resizeStarCanvas();
+      createStars();
+    });
+
     resizeStarCanvas();
     createStars();
-  });
-
-  resizeStarCanvas();
-  createStars();
-  drawStars();
-
-
-  // ==================== EMOJIS ====================
-  const emojis = ["😼", "🙀", "💍", "💞", "🌝", "😍", "😭", "😔", "🖤", "😡", "🎮", "🤍", "😁", "😘", "💖", "😜", "💞", "😩", "🤣", "💝", "🤩", "🥺", "👿", "💘", "🤟", "🤰", "🧡", "💉", "💎", "💫", "💻", "🚀", "🚗", "💕", "🐎", "🏍️"];
-
-  function spawnEmojis() {
-    document.querySelectorAll('.floating-emoji').forEach(e => e.remove());
-    for (let i = 0; i < 25; i++) {
-      const emoji = document.createElement("div");
-      emoji.className = "floating-emoji";
-      emoji.style.left = (5 + Math.random() * 90) + "vw";
-      emoji.style.animationDuration = (6 + Math.random() * 3) + "s";
-      emoji.style.top = "100vh";
-      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      document.body.appendChild(emoji);
-    }
-  }
-
-  function closeModal() {
-    document.getElementById('ringModal').style.display = 'none';
-    document.getElementById('ringRevealFinal').style.display = 'block';
-    spawnEmojis();
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    spawnEmojis();
-    document.getElementById("revealBtn").addEventListener("click", () => {
-      document.getElementById("ringModal").style.display = 'flex';
-    });
-  });
-
-  // ==================== SPARKLES ====================
-  const sparkleCanvas = document.getElementById("sparkleCanvas");
-  const sparkleCtx = sparkleCanvas.getContext("2d");
-  let sparkles = [];
-
-  function resizeSparkleCanvas() {
-    sparkleCanvas.width = sparkleCanvas.offsetWidth;
-    sparkleCanvas.height = sparkleCanvas.offsetHeight;
-  }
-
-  function createSparkle() {
-    return {
-      x: Math.random() * sparkleCanvas.width,
-      y: Math.random() * sparkleCanvas.height,
-      radius: Math.random() * 1.5 + 0.5,
-      opacity: Math.random() * 0.5 + 0.5,
-      speedY: Math.random() * 0.5 + 0.2,
-      life: 0,
-      maxLife: 80 + Math.random() * 20
-    };
-  }
-
-  function drawSparkles() {
-    sparkleCtx.clearRect(0, 0, sparkleCanvas.width, sparkleCanvas.height);
-    sparkles.forEach((s, i) => {
-      sparkleCtx.beginPath();
-      sparkleCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-      sparkleCtx.fillStyle = `rgba(255, 255, 255, ${s.opacity})`;
-      sparkleCtx.fill();
-      s.y -= s.speedY;
-      s.life++;
-      if (s.life > s.maxLife) sparkles[i] = createSparkle();
-    });
-    requestAnimationFrame(drawSparkles);
-  }
-
-  function startSparkles() {
-    resizeSparkleCanvas();
-    sparkles = Array.from({ length: 50 }, createSparkle);
-    drawSparkles();
-  }
-
-  function openLoveLetter() {
-    const modal = document.getElementById("loveLetterModal");
-    modal.style.display = "flex";
-    setTimeout(startSparkles, 50);
-  }
-
-  function closeLoveLetter() {
-    document.getElementById("loveLetterModal").style.display = "none";
-  }
-
-  window.addEventListener("resize", resizeSparkleCanvas);
-</script>
-<div class="modal" id="loveLetterModal" onclick="closeLoveLetter()">
-<canvas class="sparkle-canvas" id="sparkleCanvas"></canvas>
-<div class="modal-content" onclick="event.stopPropagation()">
-<h2>💌 To My Triniti</h2>
-<p>
-      Every moment with you feels like stardust in my chest.  
-      From Roblox to the deepest conversations, from your loudest laugh to your quietest sighs — I love it all.  
-      I don’t just love you — I’m in love with every part of your soul.  
-      You made me believe in forever, and I can’t wait to grow old with you.  
-      This ring, this site, this everything — it’s all for you.  
-      💍💙 Forever yours,<br/>
-      — Naimul
-    </p>
-</div>
-</div>
+    drawStars();
+  </script>
 </body>
 </html>
