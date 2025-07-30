@@ -510,6 +510,16 @@
       document.getElementById('ringModal').style.display = 'none';
       document.getElementById('ringRevealFinal').style.display = 'block';
       spawnEmojis();
+      let count = 0;
+const interval = setInterval(() => {
+  confetti({
+    particleCount: 100,
+    spread: 60,
+    origin: { y: 0.6 }
+  });
+  count++;
+  if (count === 3) clearInterval(interval);
+}, 400);
     }
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -646,6 +656,7 @@
     createStars();
     drawStars();
   </script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 </body>
 </html>
