@@ -546,7 +546,8 @@
       sparkles.forEach((s, i) => {
         sparkleCtx.beginPath();
         sparkleCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-        sparkleCtx.fillStyle = `rgba(255, 255, 255, ${s.opacity})`;
+        const pastelHue = Math.floor(Math.random() * 360);
+        sparkleCtx.fillStyle = `hsla(${pastelHue}, 100%, 85%, ${s.opacity})`;
         sparkleCtx.fill();
         s.y -= s.speedY;
         s.life++;
