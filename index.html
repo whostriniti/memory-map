@@ -800,6 +800,9 @@ function closeModal() {
     const modal = document.getElementById("loveLetterModal");
     modal.style.display = "flex";
     setTimeout(startSparkles, 50);
+    resizeCanvas();
+  createStars();
+  animate();
   }
 
   function closeLoveLetter() {
